@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Podcast & Videopodcast Produktion Frankfurt | Playroom Studios</title>
+<meta name="description" content="Professionelle Podcast und Videopodcast Produktion in Frankfurt am Main. 4K Studio, Full-Service Produktion, akustisch optimiert. Playroom Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #08080f;
+  --bg2: #0b0a14;
+  --bg3: #0f0e18;
+  --surface: #141320;
+  --border: rgba(255,255,255,0.06);
+  --t1: #f0ede8;
+  --t2: #b5b0a8;
+  --t3: #6b665e;
+  --ac: #e8611a;
+  --ac2: #f47a3a;
+  --fd: 'Outfit', sans-serif;
+  --fs: 'Cormorant Garamond', 'Georgia', serif;
+  --fb: 'DM Sans', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --max: 1240px;
+  --radius: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fb);
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at 30% 0%, rgba(30,20,60,0.5) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 50%, rgba(15,15,45,0.4) 0%, transparent 50%),
+                    radial-gradient(ellipse at 20% 100%, rgba(25,15,50,0.35) 0%, transparent 55%);
+  color: var(--t1);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { display: block; max-width: 100%; border-radius: var(--radius); box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 2px 12px rgba(0,0,0,0.3); }
+
+/* ─── NAVIGATION ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 2rem 3.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: transparent;
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  transition: background 1s var(--ease), padding 1s var(--ease);
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.35);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  padding: 1.1rem 3.5rem;
+}
+.nav-logo img {
+  height: 140px; opacity: 0.55;
+  border-radius: 0; box-shadow: none;
+  transition: height 1s var(--ease), opacity 1s var(--ease);
+}
+nav.scrolled .nav-logo img { height: 44px; opacity: 0.9; }
+
+.nav-links {
+  display: flex; gap: 1.6rem; list-style: none;
+}
+.nav-links a {
+  color: var(--t1); text-decoration: none;
+  font-family: var(--fd); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--t1); }
+.nav-links a.active { color: var(--ac); }
+.nav-links {
+  position: relative;
+}
+.nav-indicator {
+  position: absolute;
+  bottom: -4px;
+  height: 2px;
+  background: var(--ac);
+  border-radius: 1px;
+  pointer-events: none;
+  transition: left 0.55s var(--ease), width 0.55s var(--ease), opacity 0.4s ease;
+  opacity: 0;
+}
+
+.nav-cta {
+  background: transparent; color: var(--t1);
+  padding: 0.6rem 1.6rem;
+  border: 1px solid rgba(240,237,232,0.2);
+  border-radius: var(--radius);
+  font-family: var(--fd); font-weight: 600; font-size: 0.75rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.4s var(--ease);
+}
+.nav-cta:hover {
+  background: var(--t1); color: var(--bg);
+  border-color: var(--t1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240,237,232,0.15);
+}
+
+.hamburger {
+  display: none; flex-direction: column; gap: 6px;
+  cursor: pointer; background: none; border: none; padding: 5px;
+}
+.hamburger span {
+  width: 26px; height: 1.5px; background: var(--t1);
+  transition: 0.3s;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative; height: 100vh; min-height: 760px;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center center;
+  filter: brightness(0.6) contrast(1.05);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8,8,15,0.2) 0%,
+    rgba(8,8,15,0) 30%,
+    rgba(8,8,15,0.15) 55%,
+    rgba(8,8,15,0.92) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: 0 3.5rem 10rem 30vw;
+}
+.hero-label {
+  font-family: var(--fd);
+  font-size: 1.05rem; font-weight: 600;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--t1);
+  margin-bottom: 2rem;
+  opacity: 0; transform: translateY(20px);
+  animation: reveal 0.8s var(--ease) 0.3s forwards;
+}
+.hero-title {
+  font-family: var(--fd);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 800; line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: #fff;
+  max-width: 820px;
+  margin-bottom: 2rem;
+  opacity: 0; transform: translateY(30px);
+  animation: reveal 0.9s var(--ease) 0.5s forwards;
+  transition: opacity 0.15s ease;
+  will-change: opacity;
+}
+.hero-sub {
+  font-family: var(--fb);
+  font-size: clamp(0.95rem, 1.4vw, 1.12rem);
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8; font-weight: 300;
+  max-width: 560px;
+  margin-bottom: 3rem;
+  opacity: 0; transform: translateY(20px);
+  animation: reveal 0.8s var(--ease) 0.7s forwards;
+}
+.hero-actions {
+  display: flex; gap: 1.2rem; flex-wrap: wrap;
+  opacity: 0; transform: translateY(20px);
+  animation: reveal 0.8s var(--ease) 0.9s forwards;
+}
+.btn-primary {
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(135deg, var(--ac) 0%, #d4520f 100%);
+  color: #fff;
+  padding: 1.1rem 2.8rem;
+  border: none; border-radius: var(--radius);
+  font-family: var(--fd); font-weight: 700;
+  font-size: 0.82rem; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+  cursor: pointer;
+  transition: all 0.5s var(--ease);
+  box-shadow: 0 4px 20px rgba(232,97,26,0.25), 0 0 0 0 rgba(232,97,26,0);
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s var(--ease);
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(232,97,26,0.35), 0 0 0 1px rgba(232,97,26,0.15);
+}
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.99);
+  box-shadow: 0 4px 16px rgba(232,97,26,0.25);
+}
+.btn-secondary {
+  display: inline-block;
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  color: var(--t1);
+  padding: 1.1rem 2.8rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  font-family: var(--fd); font-weight: 600;
+  font-size: 0.82rem; letter-spacing: 0.12em;
+  text-transform: uppercase; text-decoration: none;
+  cursor: pointer;
+  transition: all 0.5s var(--ease);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+.btn-secondary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s var(--ease);
+}
+.btn-secondary:hover::before { transform: translateX(100%); }
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.35);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.06);
+}
+.btn-secondary:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── COMMON ─── */
+.section {
+  padding: 9rem 3.5rem;
+}
+.section--alt {
+  background: transparent;
+}
+.container {
+  max-width: var(--max); margin: 0 auto;
+}
+.label {
+  font-family: var(--fd);
+  font-size: 0.88rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ac);
+  margin-bottom: 1.8rem;
+}
+.heading {
+  font-family: var(--fd);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  font-weight: 800; line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+}
+.heading--serif {
+  font-family: var(--fs);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  font-style: italic;
+  color: var(--t2);
+}
+.text {
+  color: var(--t2); line-height: 1.85;
+  font-size: 1.08rem; font-weight: 300;
+}
+.text strong { color: var(--t1); font-weight: 500; }
+.text + .text { margin-top: 1.2rem; }
+
+/* Reveal animation */
+.reveal-element {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal-element.visible {
+  opacity: 1; transform: translateY(0);
+}
+
+/* ─── 1. EDITORIAL INTRO ─── */
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+.editorial-grid .heading {
+  font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+}
+.editorial-text .text:first-of-type {
+  color: var(--t1); font-size: 1.15rem; font-weight: 400;
+  line-height: 1.8;
+}
+
+/* ─── 2. STUDIO SECTION ─── */
+.studio-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 5rem;
+  align-items: center;
+}
+.studio-image {
+  overflow: hidden; border-radius: var(--radius);
+}
+.studio-image img {
+  width: 100%; height: 100%;
+  object-fit: cover; aspect-ratio: 4/3;
+}
+.studio-setups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 5rem;
+}
+.setup-card { overflow: hidden; }
+.setup-card-img {
+  overflow: hidden; aspect-ratio: 16/10; border-radius: var(--radius);
+}
+.setup-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1s var(--ease);
+}
+.setup-card:hover .setup-card-img img {
+  transform: scale(1.04);
+}
+.setup-card-body { padding: 1.6rem 0 0; }
+.setup-card h3 {
+  font-family: var(--fd); font-size: 1.15rem;
+  font-weight: 700; margin-bottom: 0.5rem;
+}
+.setup-card p {
+  color: var(--t2); font-size: 1rem;
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ─── 3. VIDEOPODCAST ─── */
+.video-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.video-image { overflow: hidden; border-radius: var(--radius); }
+.video-image img {
+  width: 100%; height: 100%;
+  object-fit: cover; aspect-ratio: 4/3;
+}
+
+/* ─── 4. VIDEO EMBED ─── */
+.embed-intro {
+  text-align: center; max-width: 640px;
+  margin: 0 auto 3.5rem;
+}
+.vid-outer {
+  position: relative; margin-top: 0; padding: 0;
+  background: none;
+  max-width: 1060px; margin: 0 auto;
+  border-radius: calc(var(--radius) + 2px);
+}
+.vw {
+  position: relative; aspect-ratio: 16/9;
+  overflow: hidden; background: #000;
+  border-radius: var(--radius);
+}
+.vw iframe {
+  width: 100%; height: 100%; border: none; display: block;
+  transition: filter 1s ease;
+}
+.vw iframe.blurred { filter: blur(12px) brightness(0.7); }
+
+.play-overlay {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 1.6rem;
+  cursor: pointer; transition: opacity 0.6s ease;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, transparent 70%);
+}
+.play-overlay.hidden { opacity: 0; pointer-events: none; }
+.play-btn {
+  width: 100px; height: 100px;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.5s var(--ease);
+  position: relative;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.play-btn::before {
+  content: '';
+  position: absolute; inset: -12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.5s var(--ease);
+}
+.play-overlay:hover .play-btn {
+  transform: scale(1.06);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.45);
+  box-shadow: 0 0 50px rgba(255,255,255,0.08);
+}
+.play-overlay:hover .play-btn::before {
+  inset: -18px;
+  border-color: rgba(255,255,255,0.15);
+}
+.play-btn svg { margin-left: 4px; }
+.play-text {
+  font-family: var(--fd); font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.vid-label {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  margin-top: 1.5rem;
+  font-family: var(--fd); font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--t3);
+}
+
+/* ─── 5. WHY PLAYROOM ─── */
+.why-intro {
+  max-width: 800px; margin: 0 auto 5rem;
+  text-align: center;
+}
+.why-intro .heading {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.4;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.why-item {
+  padding: 2.4rem;
+  background: rgba(255,255,255,0.025);
+  border-radius: var(--radius);
+  transition: background 0.4s;
+}
+.why-item:hover { background: rgba(255,255,255,0.05); }
+.why-number {
+  font-family: var(--fd); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.15em; color: var(--t3);
+  margin-bottom: 1.4rem;
+}
+.why-item h3 {
+  font-family: var(--fd); font-size: 1.08rem;
+  font-weight: 700; line-height: 1.35;
+  margin-bottom: 0.8rem;
+}
+.why-item p {
+  font-size: 0.98rem; color: var(--t2);
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ─── 6. CREATIVE EXTENSIONS ─── */
+.creative-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+.creative-image { overflow: hidden; border-radius: var(--radius); }
+.creative-image img {
+  width: 100%; aspect-ratio: 16/10; object-fit: cover;
+  filter: brightness(1.04) contrast(0.96) blur(0.4px);
+}
+.creative-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.creative-item {
+  padding: 2.4rem;
+  background: rgba(255,255,255,0.025);
+  border-radius: var(--radius);
+}
+.creative-item h3 {
+  font-family: var(--fd); font-size: 1.08rem;
+  font-weight: 700; margin-bottom: 0.7rem;
+}
+.creative-item p {
+  font-size: 0.98rem; color: var(--t2);
+  line-height: 1.75; font-weight: 300;
+}
+
+/* ─── 7. FULL SERVICE ─── */
+.service-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.service-image { overflow: hidden; border-radius: var(--radius); }
+.service-image img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover;
+}
+.service-list {
+  list-style: none; padding: 0;
+  margin-top: 1.5rem;
+}
+.service-list li {
+  color: var(--t2); font-size: 1.05rem;
+  line-height: 1.6; font-weight: 300;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  padding-left: 0;
+  position: relative;
+  display: flex; align-items: center; gap: 1rem;
+}
+.service-list li::before {
+  content: '';
+  width: 4px; height: 4px; flex-shrink: 0;
+  background: var(--ac); border-radius: 50%;
+}
+
+/* ─── USECASE GRID ─── */
+.usecase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.usecase-item {
+  padding: 2.4rem 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.usecase-item h3 {
+  font-family: var(--fd); font-size: 1.05rem;
+  font-weight: 700; line-height: 1.35;
+  margin-bottom: 0.8rem;
+}
+.usecase-item p {
+  font-size: 0.95rem; color: var(--t2);
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ─── 8. USE CASES ─── */
+.cases-intro {
+  max-width: 620px; margin: 0 auto 4rem;
+  text-align: center;
+}
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+.case-item {
+  padding: 2.4rem 1.8rem;
+  background: rgba(255,255,255,0.025);
+  border-radius: var(--radius);
+  transition: background 0.4s;
+}
+.case-item:hover { background: rgba(255,255,255,0.05); }
+.case-item h3 {
+  font-family: var(--fd); font-size: 1rem;
+  font-weight: 700; line-height: 1.35;
+  margin-bottom: 0.6rem;
+  min-height: 2.7rem;
+}
+.case-item p {
+  font-size: 0.92rem; color: var(--t2);
+  line-height: 1.65; font-weight: 300;
+}
+
+/* ─── 9. WORKFLOW ─── */
+.workflow-intro {
+  max-width: 640px; margin: 0 auto 4rem;
+  text-align: center;
+}
+.workflow-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+.step {
+  padding: 2.8rem 2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.step-num {
+  font-family: var(--fd); font-size: 3rem;
+  font-weight: 800; color: rgba(232,97,26,0.45);
+  line-height: 1; margin-bottom: 1.2rem;
+}
+.step h3 {
+  font-family: var(--fd); font-size: 1rem;
+  font-weight: 700; margin-bottom: 0.6rem;
+}
+.step p {
+  font-size: 0.95rem; color: var(--t2);
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ─── 10. GALLERY ─── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.2rem;
+  margin-top: 4rem;
+}
+.gallery-item { overflow: hidden; border-radius: var(--radius); }
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.gallery-item:hover img { transform: scale(1.03); }
+.gallery-item--tall {
+  grid-row: span 2;
+}
+.gallery-item--tall img {
+  aspect-ratio: auto;
+  min-height: 100%;
+}
+.gallery-row {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+.gallery-row--a {
+  grid-template-columns: 1.6fr 1fr;
+}
+.gallery-row--b {
+  grid-template-columns: 1fr 1fr 1.4fr;
+}
+.gallery-row--a .gallery-item img {
+  aspect-ratio: 16/10;
+}
+.gallery-row--b .gallery-item img {
+  aspect-ratio: 3/2;
+}
+
+/* ─── 11. FAQ ─── */
+.faq-wrap {
+  max-width: 860px;
+  margin: 3.5rem auto 0;
+}
+.faq-item {
+  overflow: hidden;
+  margin-bottom: 0.6rem;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.02);
+  transition: background 0.8s ease;
+}
+.faq-item:hover { background: rgba(255,255,255,0.035); }
+.faq-item.open { background: rgba(255,255,255,0.045); }
+.faq-q {
+  width: 100%; background: none; border: none;
+  color: var(--t1); font-family: var(--fd);
+  font-size: 1.08rem; font-weight: 600;
+  text-align: left; padding: 1.5rem 2rem;
+  cursor: pointer; display: flex;
+  justify-content: space-between; align-items: center;
+  gap: 2rem;
+  transition: color 0.3s;
+}
+.faq-q:hover { color: var(--ac); }
+.faq-q .arrow {
+  font-size: 1.2rem;
+  width: 32px; height: 32px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+  transform: rotate(0deg);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s ease, border-color 0.6s ease, background 0.6s ease;
+  color: var(--t3); font-weight: 300;
+}
+.faq-item.open .faq-q .arrow {
+  transform: rotate(135deg);
+  color: var(--ac);
+  border-color: rgba(232,97,26,0.3);
+  background: rgba(232,97,26,0.08);
+}
+.faq-a {
+  max-height: 0; overflow: hidden;
+  opacity: 0;
+  transition: max-height 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s ease 0.15s;
+}
+.faq-item.open .faq-a { max-height: 600px; opacity: 1; }
+.faq-a p {
+  color: var(--t2); font-size: 1rem;
+  line-height: 1.85; font-weight: 300;
+  padding: 0 2rem 0.8rem;
+}
+.faq-a p:last-child { padding-bottom: 2rem; }
+
+/* ─── 12. FINAL CTA ─── */
+.cta-section {
+  position: relative; padding: 9rem 3.5rem;
+  text-align: center; overflow: hidden;
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  filter: brightness(0.35) contrast(1.1);
+}
+.cta-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--bg) 0%, transparent 20%, transparent 80%, var(--bg) 100%);
+}
+.cta-content {
+  position: relative; z-index: 2;
+  max-width: 620px; margin: 0 auto;
+}
+.cta-content .heading { margin-bottom: 1.2rem; }
+.cta-content .text {
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+}
+.cta-info {
+  margin-top: 2.5rem;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.6rem;
+}
+.cta-info a {
+  color: var(--t2); text-decoration: none;
+  font-size: 0.98rem; transition: color 0.3s;
+}
+.cta-info a:hover { color: var(--ac); }
+.cta-info .address {
+  color: var(--t3); font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+/* ─── STICKY FADE EFFECT ─── */
+.editorial-grid > .reveal-element:first-child {
+  position: relative;
+}
+.editorial-sticky-wrap {
+  position: sticky; top: 10rem;
+  transition: opacity 0.3s ease;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg);
+  padding: 2.5rem 3.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--border);
+}
+footer img { height: 28px; opacity: 0.5; }
+footer p { font-size: 0.78rem; color: var(--t3); }
+footer a { color: var(--t3); text-decoration: none; transition: color 0.3s; }
+
+/* ─── COOKIE BANNER ─── */
+.cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.8rem 3rem;
+  background: rgba(10,10,18,0.75);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between; gap: 2.5rem;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.22,1,0.36,1), opacity 0.6s ease;
+}
+.cookie-banner.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+.cookie-banner.hidden {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.cookie-text {
+  font-family: var(--fb); font-size: 0.88rem; color: var(--t2);
+  line-height: 1.6; font-weight: 300; flex: 1;
+}
+.cookie-text a { color: var(--t1); text-decoration: underline; text-underline-offset: 2px; }
+.cookie-actions {
+  display: flex; gap: 0.8rem; flex-shrink: 0;
+}
+.cookie-btn {
+  font-family: var(--fd); font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.75rem 1.6rem; border-radius: var(--radius);
+  cursor: pointer; border: none;
+  transition: all 0.4s var(--ease);
+}
+.cookie-btn--accept {
+  background: var(--ac); color: #fff;
+}
+.cookie-btn--accept:hover {
+  background: var(--ac2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232,97,26,0.3);
+}
+.cookie-btn--decline {
+  background: rgba(255,255,255,0.06); color: var(--t2);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.cookie-btn--decline:hover {
+  background: rgba(255,255,255,0.1); color: var(--t1);
+  border-color: rgba(255,255,255,0.2);
+}
+.video-placeholder {
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 1rem;
+  aspect-ratio: 16/9; background: rgba(255,255,255,0.03);
+  border-radius: var(--radius);
+  font-family: var(--fd); color: var(--t3);
+  font-size: 0.85rem; text-align: center;
+  padding: 2rem;
+}
+@media (max-width: 640px) {
+  .cookie-banner { flex-direction: column; padding: 1.5rem 2rem; gap: 1.2rem; }
+  .cookie-actions { width: 100%; }
+  .cookie-btn { flex: 1; text-align: center; }
+}
+footer a:hover { color: var(--t2); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  nav { padding: 1.2rem 2rem; }
+  nav.scrolled { padding: 0.6rem 2rem; }
+  .nav-logo img { height: 100px; }
+  nav.scrolled .nav-logo img { height: 36px; opacity: 0.9; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section { padding: 6rem 2rem; }
+  .hero-content { padding: 0 2rem 4rem; }
+
+  .editorial-grid,
+  .studio-hero,
+  .video-grid,
+  .creative-layout,
+  .service-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .editorial-sticky-wrap { position: static !important; }
+
+  .studio-setups { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .cases-grid { grid-template-columns: 1fr 1fr; }
+  .usecase-grid { grid-template-columns: 1fr 1fr; }
+  .workflow-steps { grid-template-columns: 1fr; }
+  .creative-grid { grid-template-columns: 1fr; }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .gallery-item--tall { grid-row: auto; }
+  .gallery-item--tall img { aspect-ratio: 16/9; }
+  .gallery-row--a, .gallery-row--b { grid-template-columns: 1fr 1fr; }
+
+  footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+}
+
+@media (max-width: 640px) {
+  .hero-title { font-size: 2.2rem; }
+  .hero-actions { flex-direction: column; }
+  .btn-primary, .btn-secondary { text-align: center; }
+  .why-grid,
+  .cases-grid,
+  .usecase-grid { grid-template-columns: 1fr; }
+  .cta-section { padding: 6rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ─── -->
+<nav id="navbar">
+  <a href="https://playroom-studios.com" target="_blank" class="nav-logo">
+    <img src="docs/logo_playroom_white.png" alt="Playroom Studios">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Start</a></li>
+    <li><a href="#relevanz">Warum Podcast</a></li>
+    <li><a href="#einsatzbereiche">Einsatz</a></li>
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#videopodcast">Videopodcast</a></li>
+    <li><a href="#einblick">Einblick</a></li>
+    <li><a href="#warum">Warum Playroom</a></li>
+    <li><a href="#kreativ">Kreativ</a></li>
+    <li><a href="#leistungen">Leistungen</a></li>
+    <li><a href="#atmosphaere">Atmosphäre</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── 1. HERO ─── -->
+<section class="hero" id="home">
+  <div class="hero-bg" style="background-image:url('docs/Vodcast01-29.jpg')"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-label">Playroom Studios &mdash; Frankfurt am Main</div>
+    <h1 class="hero-title" id="heroTitle">Podcast &amp; Videopodcast<br>Produktion in Frankfurt</h1>
+    <p class="hero-sub">Professionelle Podcast und Videopodcast Produktion f&uuml;r Marken, Unternehmen und Agenturen. Vom Konzept bis zur finalen Auslieferung &mdash; in unserem akustisch optimierten Studio in Frankfurt.</p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn-primary">Projekt anfragen</a>
+      <a href="#studio" class="btn-secondary">Studio entdecken</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 2. EDITORIAL INTRO ─── -->
+<section class="section" id="relevanz">
+  <div class="container">
+    <div class="editorial-grid">
+      <div class="reveal-element">
+        <div class="editorial-sticky-wrap" id="editorialSticky">
+          <div class="label">Warum jetzt</div>
+          <h2 class="heading">Warum Videopodcasts f&uuml;r Unternehmen immer relevanter werden</h2>
+          <p class="heading--serif" style="margin-top:2rem;">Gespr&auml;chsformate, die Wissen teilen und Menschen im Unternehmen erreichen.</p>
+        </div>
+      </div>
+      <div class="editorial-text reveal-element" style="transition-delay:0.15s;">
+        <p class="text">Podcast- und Videopodcastformate wachsen weltweit stark. Mehr als 500 Millionen Menschen h&ouml;ren regelm&auml;&szlig;ig Podcasts, und auch im beruflichen Umfeld werden Audio- und Videoformate zunehmend selbstverst&auml;ndlich genutzt.</p>
+        <p class="text">Studien zeigen, dass &uuml;ber 70 % der Mitarbeitenden Informationen lieber in Audio- oder Videoformaten konsumieren als in langen Dokumenten oder Pr&auml;sentationen.</p>
+        <p class="text">F&uuml;r Unternehmen entstehen dadurch neue M&ouml;glichkeiten der Kommunikation: Gespr&auml;che mit F&uuml;hrungskr&auml;ften, Expertinnen und Experten <strong>machen Themen verst&auml;ndlich, pers&ouml;nlich und zug&auml;nglich.</strong></p>
+        <p class="text">Damit solche Formate professionell wirken und gerne gesehen oder geh&ouml;rt werden, spielt die <strong>Qualit&auml;t der Produktion</strong> eine entscheidende Rolle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 2b. EINSATZBEREICHE ─── -->
+<section class="section section--alt" id="einsatzbereiche">
+  <div class="container">
+    <div class="reveal-element" style="max-width:720px; margin-bottom:4rem;">
+      <div class="label">Einsatzbereiche</div>
+      <h2 class="heading">Wie Unternehmen Videopodcasts konkret einsetzen</h2>
+      <p class="text" style="margin-top:1.5rem;">Immer mehr Unternehmen nutzen Videopodcasts, um Themen, Perspektiven und Expertise sichtbar zu machen. Gespr&auml;chsformate erm&ouml;glichen es, Inhalte verst&auml;ndlich und pers&ouml;nlich zu vermitteln und gleichzeitig unterschiedliche Kommunikationskan&auml;le zu bedienen.</p>
+    </div>
+    <div class="usecase-grid reveal-element">
+      <div class="usecase-item">
+        <h3>Leadership Updates</h3>
+        <p>Gespr&auml;che mit der Unternehmensf&uuml;hrung zu strategischen Themen, Entwicklungen oder Perspektiven.</p>
+      </div>
+      <div class="usecase-item">
+        <h3>Expert Sessions</h3>
+        <p>Interviews mit Fachabteilungen oder Projektteams, in denen Innovationen, Technologien oder neue Initiativen vorgestellt werden.</p>
+      </div>
+      <div class="usecase-item">
+        <h3>Strategy Talks</h3>
+        <p>Formate, in denen F&uuml;hrungskr&auml;fte zentrale Themen der Unternehmensstrategie erl&auml;utern und einordnen.</p>
+      </div>
+      <div class="usecase-item">
+        <h3>Project Insights</h3>
+        <p>Einblicke in wichtige Projekte, Entwicklungen oder Ver&auml;nderungen innerhalb des Unternehmens.</p>
+      </div>
+      <div class="usecase-item">
+        <h3>Recruiting und<br>Employer Branding</h3>
+        <p>Gespr&auml;chsformate mit Mitarbeitenden, die Einblicke in Arbeitsbereiche, Kultur und Perspektiven im Unternehmen geben.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 3. STUDIO IN FRANKFURT ─── -->
+<section class="section section--alt" id="studio">
+  <div class="container">
+    <div class="studio-hero">
+      <div class="studio-image reveal-element">
+        <img src="docs/Vodcast01-6.jpg" alt="Playroom Studios Produktionsraum Frankfurt" loading="lazy">
+      </div>
+      <div class="reveal-element" style="transition-delay:0.15s;">
+        <div class="label">Unser Studio</div>
+        <h2 class="heading">Podcast Studio<br>in Frankfurt</h2>
+        <p class="text">Playroom Studios ist ein professionelles Podcast und Videopodcast Studio in Frankfurt am Main. Unser Studio wurde urspr&uuml;nglich f&uuml;r hochwertige Audio- und Postproduktionsarbeiten konzipiert und bietet deshalb ideale Voraussetzungen f&uuml;r Podcastaufnahmen mit exzellenter Klangqualit&auml;t.</p>
+        <p class="text">Der Aufnahmeraum ist akustisch optimiert und erm&ouml;glicht klare, nat&uuml;rliche Gespr&auml;che ohne st&ouml;rende Raumreflexionen oder Hintergrundger&auml;usche.</p>
+        <p class="text">G&auml;ste, Moderation und Produktion arbeiten in einer Umgebung, die sowohl technisch professionell als auch <strong>angenehm und entspannt ist</strong> &ndash; ein wichtiger Faktor f&uuml;r authentische Gespr&auml;che.</p>
+      </div>
+    </div>
+    <div class="studio-setups reveal-element">
+      <div class="setup-card">
+        <div class="setup-card-img">
+          <img src="docs/Vodcast01-25.jpg" alt="Fokus-Setup am Podcast-Tisch" loading="lazy">
+        </div>
+        <div class="setup-card-body">
+          <h3>Fokus-Setup</h3>
+          <p>Klassischer Podcast-Tisch mit Mikrofonen und Akzentbeleuchtung. Ideal f&uuml;r Interviews, Deep Dives und fachliche Gespr&auml;che.</p>
+        </div>
+      </div>
+      <div class="setup-card">
+        <div class="setup-card-img">
+          <img src="docs/Vodcast01-16.jpg" alt="Lounge-Setup mit Sofas" loading="lazy">
+        </div>
+        <div class="setup-card-body">
+          <h3>Lounge-Setup</h3>
+          <p>Bequeme Sofas, warmes Licht, entspannte Atmosph&auml;re. Perfekt f&uuml;r lockere Talks und Storytelling-Formate.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 4. VIDEOPODCAST 4K ─── -->
+<section class="section" id="videopodcast">
+  <div class="container">
+    <div class="video-grid">
+      <div class="reveal-element">
+        <div class="label">4K Produktion</div>
+        <h2 class="heading">Videopodcast<br>Produktion in 4K</h2>
+        <p class="text">Neben klassischen Audio-Podcasts produzieren wir bei Playroom Studios auch Videopodcasts in hochwertiger 4K Qualit&auml;t. Mehrkamerasetups erm&ouml;glichen dynamische Gespr&auml;chssituationen, die sp&auml;ter f&uuml;r YouTube, Social Media oder Unternehmensplattformen eingesetzt werden k&ouml;nnen.</p>
+        <p class="text">Das Videopodcast Setup ist so aufgebaut, dass <strong>Bild und Ton perfekt aufeinander abgestimmt sind.</strong> Dadurch entsteht ein Format, das sowohl visuell &uuml;berzeugt als auch den professionellen Klang bietet, der f&uuml;r l&auml;ngere Gespr&auml;chsformate entscheidend ist.</p>
+        <p class="text">F&uuml;r Interviewformate k&ouml;nnen G&auml;ste zudem remote zugeschaltet werden. So lassen sich Gespr&auml;chspartner flexibel integrieren, ohne auf Produktionsqualit&auml;t verzichten zu m&uuml;ssen.</p>
+      </div>
+      <div class="video-image reveal-element" style="transition-delay:0.15s;">
+        <img src="docs/Vodcast01-2.jpg" alt="4K HDR Multiview Monitor" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 5. VIDEO EMBED ─── -->
+<section class="section section--alt" id="einblick">
+  <div class="container" style="max-width:1060px;">
+    <div class="embed-intro reveal-element">
+      <div class="label">Einblick</div>
+      <h2 class="heading">So sieht eine Produktion bei uns aus.</h2>
+      <p class="text">Ein Blick hinter die Kulissen unseres Vodcast-Studios in Frankfurt &ndash; und was dabei entsteht.</p>
+    </div>
+    <div class="vid-outer reveal-element">
+      <div class="vw" id="vidWrap">
+        <iframe id="vimeoPlayer" class="blurred" src="" data-src="https://player.vimeo.com/video/1173310023?badge=0&amp;autopause=0&amp;player_id=vimeoPlayer&amp;app_id=58479&amp;background=1&amp;muted=1&amp;autoplay=1&amp;loop=1" title="Playroom Studios Vodcast Studio" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" allowfullscreen></iframe>
+        <div class="video-placeholder" id="videoPlaceholder" style="display:none; position:absolute; inset:0;">
+          <p>Dieses Video wird von Vimeo bereitgestellt.<br>Bitte akzeptiere Cookies, um das Video anzuzeigen.</p>
+        </div>
+        <div class="play-overlay" id="playOverlay">
+          <div class="play-btn">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none"><path d="M20.5 11.768a1.5 1.5 0 010 2.464L3.25 24.29A1.5 1.5 0 011 23.057V2.943a1.5 1.5 0 012.25-1.232L20.5 11.768z" fill="rgba(255,255,255,0.8)"/></svg>
+          </div>
+          <span class="play-text">Video abspielen</span>
+        </div>
+      </div>
+    </div>
+    <div class="vid-label">Playroom Studios &middot; Vodcast Produktion Frankfurt</div>
+  </div>
+</section>
+<!-- ─── 6. WHY PLAYROOM ─── -->
+<section class="section" id="warum">
+  <div class="container">
+    <div class="why-intro reveal-element">
+      <div class="label">Warum Playroom Studios</div>
+      <h2 class="heading">Professionelle Podcast-Produktionen entstehen nicht nur durch Technik, sondern durch ein Setup, das Inhalt, Atmosph&auml;re und Produktionsablauf zusammenbringt.</h2>
+    </div>
+    <div class="why-grid reveal-element">
+      <div class="why-item">
+        <div class="why-number">01</div>
+        <h3>Akustisch optimierter Aufnahmeraum</h3>
+        <p>Der Studiobereich ist speziell f&uuml;r hochwertige Sprachaufnahmen ausgelegt und sorgt f&uuml;r klare, angenehme Klangqualit&auml;t.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-number">02</div>
+        <h3>Professionelles 4K Videopodcast Setup</h3>
+        <p>Mehrkamerasysteme erm&ouml;glichen hochwertige Videopodcast Produktionen f&uuml;r YouTube, Social Media und Unternehmensplattformen.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-number">03</div>
+        <h3>Remote G&auml;ste Zuschaltung</h3>
+        <p>Interviewpartner k&ouml;nnen flexibel zugeschaltet werden, ohne den Ablauf der Produktion zu beeintr&auml;chtigen.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-number">04</div>
+        <h3>Repr&auml;sentativer Loungebereich</h3>
+        <p>Vor und nach der Aufnahme bietet unser Lounge-Bereich Raum zum Ankommen, Arbeiten oder f&uuml;r Gespr&auml;che im Team.</p>
+      </div>
+      <div class="why-item" style="grid-column: span 2;">
+        <div class="why-number">05</div>
+        <h3>Produktionserfahrung aus der Audio-Postproduktion</h3>
+        <p>Playroom Studios arbeitet seit vielen Jahren f&uuml;r Marken, Agenturen und Medienproduktionen. Diese Erfahrung flie&szlig;t auch in Podcastformate ein.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 7. CREATIVE EXTENSIONS ─── -->
+<section class="section section--alt" id="kreativ">
+  <div class="container">
+    <div class="creative-layout">
+      <div class="creative-image reveal-element">
+        <img src="docs/Vodcast01-21.jpg" alt="Fl&uuml;gel im Playroom Studio Frankfurt" loading="lazy">
+      </div>
+      <div class="reveal-element" style="transition-delay:0.15s;">
+        <div class="label">Kreative Erweiterungen</div>
+        <h2 class="heading">Mehr als Studio<br>und Aufnahme</h2>
+        <p class="text">Ein Podcast oder Videopodcast wird dann unverwechselbar, wenn Inhalt, Bild und Klang zusammen eine eigene Identit&auml;t bilden. Playroom Studios unterst&uuml;tzt deshalb auch bei der kreativen Gestaltung eines Formats &ndash; weit &uuml;ber die reine Aufnahme hinaus.</p>
+      </div>
+    </div>
+    <div class="creative-grid reveal-element">
+      <div class="creative-item">
+        <h3>Intromusik und Sounddesign</h3>
+        <p>Eigens komponierte Musik und durchdachtes Sounddesign schaffen Wiedererkennbarkeit und geben jeder Episode einen unverwechselbaren Charakter.</p>
+      </div>
+      <div class="creative-item">
+        <h3>Musikalische Beratung</h3>
+        <p>Von der Stilrichtung &uuml;ber die Stimmung bis zur Lizenzierung &ndash; wir beraten bei allen musikalischen Entscheidungen rund um das Format.</p>
+      </div>
+      <div class="creative-item">
+        <h3>CGI und 3D Animation</h3>
+        <p>F&uuml;r Formate, die visuell noch weiter gehen wollen: dreidimensionale Elemente, Produktvisualisierungen oder abstrakte Bildwelten als Teil des Formats.</p>
+      </div>
+      <div class="creative-item">
+        <h3>Motion Graphics und Bauchbinden</h3>
+        <p>Animierte Grafiken, Titel und Einblendungen geben einem Videopodcast visuelle Struktur und professionelle Wiedererkennbarkeit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 8. FULL SERVICE ─── -->
+<section class="section" id="leistungen">
+  <div class="container">
+    <div class="service-layout">
+      <div class="reveal-element">
+        <div class="label">Full Service</div>
+        <h2 class="heading">Full Service<br>Podcast Produktion</h2>
+        <p class="text">Je nach Projekt &uuml;bernehmen wir einzelne Produktionsschritte oder begleiten die komplette Entwicklung eines Formats.</p>
+        <p class="text" style="margin-top:0.8rem;"><strong>Unsere Leistungen k&ouml;nnen unter anderem umfassen:</strong></p>
+        <ul class="service-list">
+          <li>Konzeption und Formatentwicklung</li>
+          <li>Planung und Produktionssetup</li>
+          <li>Redaktionelle Unterst&uuml;tzung</li>
+          <li>Casting von Moderation, Influencern oder Testimonials</li>
+          <li>Studioaufnahme in Frankfurt</li>
+          <li>Videopodcast Produktion</li>
+          <li>Audio Postproduktion</li>
+          <li>Videoschnitt und Nachbearbeitung</li>
+          <li>Auslieferung in allen ben&ouml;tigten Formaten</li>
+        </ul>
+      </div>
+      <div class="service-image reveal-element" style="transition-delay:0.15s;">
+        <img src="docs/Vodcast01-4.jpg" alt="Podcast Mikrofon im Studio" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ─── 11. GALLERY ─── -->
+<section class="section section--alt" id="atmosphaere">
+  <div class="container">
+    <div class="reveal-element" style="max-width:640px;">
+      <div class="label">Studio Atmosph&auml;re</div>
+      <h2 class="heading">Eine gute Produktion beginnt mit einer Umgebung, in der sich G&auml;ste und Teams wohlf&uuml;hlen.</h2>
+    </div>
+    <div class="gallery-row gallery-row--a reveal-element">
+      <div class="gallery-item">
+        <img src="docs/Vodcast01-29.jpg" alt="Podcast Studio Gesamtansicht" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="docs/Vodcast01-23.jpg" alt="Loungebereich Playroom Studios" loading="lazy">
+      </div>
+    </div>
+    <div class="gallery-row gallery-row--b reveal-element">
+      <div class="gallery-item">
+        <img src="docs/Vodcast01-26.jpg" alt="Podcast-Aufnahme mit zwei Personen" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="docs/Vodcast01-13.jpg" alt="Blick durch Studiofenster" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="docs/Vodcast01-9.jpg" alt="Cinema Kamera Nahaufnahme" loading="lazy">
+      </div>
+    </div>
+    <div class="gallery-row gallery-row--a reveal-element" style="direction:rtl;">
+      <div class="gallery-item" style="direction:ltr;">
+        <img src="docs/Vodcast01-28.jpg" alt="Moderator am Stehpult im Studio" loading="lazy">
+      </div>
+      <div class="gallery-item" style="direction:ltr;">
+        <img src="docs/Vodcast01-27.jpg" alt="Studio Setup Playroom Studios" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 12. FAQ ─── -->
+<section class="section" id="faq">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:1rem;" class="reveal-element">
+      <div class="label">FAQ</div>
+      <h2 class="heading">H&auml;ufig gestellte Fragen</h2>
+    </div>
+    <div class="faq-wrap reveal-element">
+      <div class="faq-item">
+        <button class="faq-q">Wo kann man einen Videopodcast in Frankfurt aufnehmen?<span class="arrow">+</span></button>
+        <div class="faq-a">
+          <p>Playroom Studios betreibt ein Podcast- und Videopodcast-Studio in Frankfurt am Main auf der Hanauer Landstra&szlig;e.</p>
+          <p>Die Aufnahmen finden in einem akustisch optimierten Tonstudio statt, das in einer Raum-in-Raum-Konstruktion gebaut wurde. Diese Bauweise sorgt daf&uuml;r, dass der Aufnahmeraum konstruktiv von der Umgebung entkoppelt ist und stabile Bedingungen f&uuml;r Sprachaufnahmen bietet.</p>
+          <p>Neben der Audioaufnahme steht ein Mehrkamera-Setup f&uuml;r Videopodcasts zur Verf&uuml;gung, sodass Gespr&auml;che gleichzeitig als Video- und Audioformat produziert werden k&ouml;nnen.</p>
+          <p>Der Standort auf der Hanauer Landstra&szlig;e ist sowohl mit &ouml;ffentlichen Verkehrsmitteln als auch mit dem Auto gut erreichbar.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">K&ouml;nnen G&auml;ste auch remote an einem Videopodcast teilnehmen?<span class="arrow">+</span></button>
+        <div class="faq-a">
+          <p>Ja. Gespr&auml;chspartner k&ouml;nnen remote zugeschaltet werden und an einer Aufnahme teilnehmen, auch wenn sie nicht vor Ort sind.</p>
+          <p>Die Verbindung wird so eingerichtet, dass Bild und Ton in die laufende Produktion integriert werden k&ouml;nnen.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Wie viele Kameras werden bei einem Videopodcast eingesetzt?<span class="arrow">+</span></button>
+        <div class="faq-a">
+          <p>Die Anzahl der Kameras h&auml;ngt vom jeweiligen Gespr&auml;chsformat und von der Anzahl der Teilnehmenden ab.</p>
+          <p>F&uuml;r typische Gespr&auml;chssituationen mit zwei bis vier Personen wird in der Regel ein Mehrkamera-Setup eingesetzt. Dabei erh&auml;lt jede Person eine eigene Kameraeinstellung, zus&auml;tzlich kann eine weitere Kamera f&uuml;r eine Totale oder f&uuml;r Gespr&auml;chssituationen verwendet werden.</p>
+          <p>Wie viele Kameras eingesetzt werden und welches Lichtsetting sinnvoll ist, wird in der Regel nach einem kurzen Produktionsbriefing entschieden. Dabei orientiert sich das Setup an den inhaltlichen Anforderungen und der gew&uuml;nschten Bildsprache des Formats.</p>
+          <p>Playroom Studios &uuml;bernimmt bei Bedarf auch die Organisation der technischen Ausstattung und k&uuml;mmert sich um die Anmietung der ben&ouml;tigten Kameras, Lichttechnik und weiterer Produktionstechnik.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Wie l&auml;uft die Produktion eines Videopodcasts im Studio ab?<span class="arrow">+</span></button>
+        <div class="faq-a">
+          <p>Am Anfang steht in der Regel ein Gespr&auml;ch &uuml;ber das geplante Format und die inhaltlichen Ziele. Dabei wird gekl&auml;rt, welche Rolle der Podcast im Unternehmen spielen soll und welche Aufgaben vom Unternehmen selbst &uuml;bernommen werden.</p>
+          <p>Einige Organisationen bringen bereits ein fertiges Konzept und eine Redaktion mit. In anderen F&auml;llen wird gemeinsam &uuml;berlegt, wie Gespr&auml;che aufgebaut sein k&ouml;nnen, wer als Gespr&auml;chspartner geeignet ist und ob eine Moderation oder ein Interviewer sinnvoll ist.</p>
+          <p>Auch organisatorische Fragen werden fr&uuml;h gekl&auml;rt, zum Beispiel ob es sich um eine einzelne Episode oder um ein regelm&auml;&szlig;iges Format handelt.</p>
+          <p>Auf dieser Grundlage wird die Produktion geplant. Dazu geh&ouml;ren unter anderem das technische Setup, die Anzahl der Kameras, die Gestaltung der Gespr&auml;chssituation sowie der Ablauf der Aufnahme.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Ist ein Videopodcast auch m&ouml;glich, wenn im Unternehmen noch keine Erfahrung mit Podcasts besteht?<span class="arrow">+</span></button>
+        <div class="faq-a">
+          <p>Ja. Viele Podcast- und Videopodcastformate entstehen in Unternehmen, die zuvor noch keine Erfahrung mit diesem Medium hatten.</p>
+          <p>Am Anfang steht in der Regel ein Gespr&auml;ch &uuml;ber Ziele, Inhalte und m&ouml;gliche Formate. Dabei wird gemeinsam gekl&auml;rt, welche Themen sich eignen, welche Gespr&auml;chspartner sinnvoll sind und wie ein Format strukturiert sein kann.</p>
+          <p>Die Produktion kann anschlie&szlig;end an die vorhandenen Ressourcen im Unternehmen angepasst werden.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Warum ist ein professionelles Tonstudio f&uuml;r Podcasts wichtig?<span class="arrow">+</span></button>
+        <div class="faq-a">
+          <p>Bei Gespr&auml;chsformaten ist die Tonqualit&auml;t ein entscheidender Faktor f&uuml;r den Gesamteindruck. Stimmen sollten klar, nat&uuml;rlich und ohne st&ouml;rende Hintergrundger&auml;usche aufgenommen werden.</p>
+          <p>Normale R&auml;ume oder klassische Videostudios sind h&auml;ufig nicht speziell f&uuml;r Sprachaufnahmen gebaut. Dadurch k&ouml;nnen Raumhall oder Umgebungsger&auml;usche entstehen, die sich sp&auml;ter nur begrenzt korrigieren lassen.</p>
+          <p>Ein Tonstudio ist dagegen akustisch so konstruiert, dass Sprache kontrolliert und gleichm&auml;&szlig;ig aufgenommen werden kann.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Wie viele Folgen werden normalerweise produziert?<span class="arrow">+</span></button>
+        <div class="faq-a">
+          <p>Das h&auml;ngt vom jeweiligen Format und den Zielen des Unternehmens ab.</p>
+          <p>Einige Projekte bestehen aus einzelnen Episoden, zum Beispiel f&uuml;r Interviews oder besondere Themen. H&auml;ufiger werden Podcasts jedoch als regelm&auml;&szlig;iges Format geplant.</p>
+          <p>F&uuml;r viele Unternehmenspodcasts hat sich eine Frequenz von ein bis zwei Folgen pro Monat als gut umsetzbar erwiesen. Dieses Tempo erm&ouml;glicht eine kontinuierliche Ver&ouml;ffentlichung, ohne dass Vorbereitung und Produktion zu aufwendig werden.</p>
+          <p>Bei der Planung wird daher meist gemeinsam &uuml;berlegt, welche Struktur sinnvoll ist und in welchen Abst&auml;nden neue Folgen erscheinen k&ouml;nnen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── 13. FINAL CTA ─── -->
+<section class="cta-section" id="kontakt">
+  <div class="cta-bg" style="background-image:url('docs/Vodcast01-11.jpg')"></div>
+  <div class="cta-overlay"></div>
+  <div class="cta-content reveal-element">
+    <div class="label" style="font-size:2.2rem; font-weight:800; letter-spacing:0.15em;">Let's Talk</div>
+    <h2 class="heading">Lass uns dein Podcastformat entwickeln</h2>
+    <p class="text" style="color: var(--t1); font-size: 1.1rem;">Ob neue Formatidee oder konkretes Projekt &ndash; wir beraten dich gern, wie sich Podcast und Videopodcast Produktionen f&uuml;r deine Marke oder dein Unternehmen sinnvoll umsetzen lassen.</p>
+    <a href="mailto:hello@playroom-studios.com?subject=Podcast%20Projekt%20Anfrage" class="btn-primary">Projekt anfragen</a>
+    <div class="cta-info">
+      <a href="tel:+496940806100">+49 69 4080 6100</a>
+      <a href="mailto:hello@playroom-studios.com">hello@playroom-studios.com</a>
+      <span>Playroom Studios GmbH</span>
+      <span class="address">Hanauer Landstra&szlig;e 287 &middot; 60314 Frankfurt am Main</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COOKIE BANNER ─── -->
+<div class="cookie-banner" id="cookieBanner">
+  <p class="cookie-text">Wir nutzen Cookies und externe Dienste, um diese Seite zu verbessern und Inhalte bereitzustellen. Mehr dazu in unserer <a href="https://playroom-studios.com/Playroom_Studios_Privacy_Policy_DE_EN.pdf" target="_blank">Datenschutzerkl&auml;rung</a>.</p>
+  <div class="cookie-actions">
+    <button class="cookie-btn cookie-btn--decline" id="cookieDecline">Nur notwendige</button>
+    <button class="cookie-btn cookie-btn--accept" id="cookieAccept">Akzeptieren</button>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p>&copy; 2026 Playroom Studios GmbH &middot; <a href="https://playroom-studios.com">playroom-studios.com</a></p>
+  <p><a href="https://playroom-studios.com/Playroom_Studios_Privacy_Policy_DE_EN.pdf" target="_blank">Datenschutz</a> &middot; <a href="https://playroom-studios.com/impressum" target="_blank">Impressum</a> &middot; <a href="#" id="cookieSettings">Cookies</a></p>
+</footer>
+
+<!-- ─── COOKIE CONSENT SCRIPT ─── -->
+<script>
+(function(){
+  var banner = document.getElementById('cookieBanner');
+  var acceptBtn = document.getElementById('cookieAccept');
+  var declineBtn = document.getElementById('cookieDecline');
+  var iframe = document.getElementById('vimeoPlayer');
+  var overlay = document.getElementById('playOverlay');
+  var placeholder = document.getElementById('videoPlaceholder');
+  var cookieSettingsBtn = document.getElementById('cookieSettings');
+  var consent = localStorage.getItem('cookie_consent');
+
+  function loadVimeo(reload) {
+    if (reload) { location.reload(); return; }
+    if (iframe && iframe.dataset.src && !iframe.src.includes('vimeo')) {
+      iframe.src = iframe.dataset.src;
+    }
+    if (placeholder) placeholder.style.display = 'none';
+    if (iframe) iframe.style.display = '';
+  }
+
+  function showPlaceholder() {
+    if (iframe) iframe.style.display = 'none';
+    if (overlay) overlay.style.display = 'none';
+    if (placeholder) placeholder.style.display = 'flex';
+  }
+
+  function hideBanner() {
+    banner.classList.remove('visible');
+    banner.classList.add('hidden');
+  }
+
+  if (consent === 'accepted') {
+    loadVimeo();
+  } else if (consent === 'declined') {
+    showPlaceholder();
+  } else {
+    setTimeout(function(){ banner.classList.add('visible'); }, 800);
+  }
+
+  acceptBtn.addEventListener('click', function(){
+    localStorage.setItem('cookie_consent', 'accepted');
+    loadVimeo(true);
+  });
+
+  declineBtn.addEventListener('click', function(){
+    localStorage.setItem('cookie_consent', 'declined');
+    hideBanner();
+    showPlaceholder();
+  });
+
+  cookieSettingsBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    localStorage.removeItem('cookie_consent');
+    banner.classList.remove('hidden');
+    banner.classList.add('visible');
+  });
+
+  if (overlay) {
+    var played = false;
+    overlay.addEventListener('click', function(){
+      if (played) return;
+      played = true;
+      iframe.src = 'https://player.vimeo.com/video/1173310023?badge=0&autopause=0&player_id=vimeoPlayer&app_id=58479&autoplay=1';
+      iframe.classList.remove('blurred');
+      overlay.classList.add('hidden');
+    });
+  }
+
+  if (consent === 'accepted') {
+    var s = document.createElement('script');
+    s.src = 'https://player.vimeo.com/api/player.js';
+    document.body.appendChild(s);
+  }
+})();
+</script>
+
+<!-- ─── SCRIPTS ─── -->
+<script>
+// Navbar scroll
+var nb = document.getElementById('navbar');
+window.addEventListener('scroll', function() {
+  nb.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Hamburger
+var hb = document.getElementById('hamburger');
+var nl = document.getElementById('navLinks');
+hb.addEventListener('click', function() { nl.classList.toggle('open'); });
+var lnks = nl.querySelectorAll('a');
+for (var i = 0; i < lnks.length; i++) {
+  lnks[i].addEventListener('click', function() { nl.classList.remove('open'); });
+}
+
+// Active nav link with sliding indicator
+var sectionIds = [];
+var navLinksAll = nl.querySelectorAll('a[href^="#"]');
+for (var s = 0; s < navLinksAll.length; s++) {
+  sectionIds.push(navLinksAll[s].getAttribute('href').substring(1));
+}
+
+var indicator = document.createElement('span');
+indicator.className = 'nav-indicator';
+nl.appendChild(indicator);
+
+function moveIndicator(link) {
+  if (!link) { indicator.style.opacity = '0'; return; }
+  var rect = link.getBoundingClientRect();
+  var parentRect = nl.getBoundingClientRect();
+  indicator.style.left = (rect.left - parentRect.left) + 'px';
+  indicator.style.width = rect.width + 'px';
+  indicator.style.opacity = '1';
+}
+
+var sectionObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var id = entry.target.id;
+      var activeLink = null;
+      for (var s = 0; s < navLinksAll.length; s++) {
+        var isActive = navLinksAll[s].getAttribute('href') === '#' + id;
+        navLinksAll[s].classList.toggle('active', isActive);
+        if (isActive) activeLink = navLinksAll[s];
+      }
+      moveIndicator(activeLink);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '-80px 0px -40% 0px' });
+
+for (var s = 0; s < sectionIds.length; s++) {
+  var sec = document.getElementById(sectionIds[s]);
+  if (sec) sectionObserver.observe(sec);
+}
+
+window.addEventListener('resize', function() {
+  var active = nl.querySelector('a.active');
+  if (active) moveIndicator(active);
+});
+
+// FAQ accordion
+var fqs = document.querySelectorAll('.faq-q');
+for (var j = 0; j < fqs.length; j++) {
+  fqs[j].addEventListener('click', function() {
+    var item = this.parentElement;
+    var wasOpen = item.classList.contains('open');
+    var allItems = document.querySelectorAll('.faq-item');
+    for (var k = 0; k < allItems.length; k++) { allItems[k].classList.remove('open'); }
+    if (!wasOpen) item.classList.add('open');
+  });
+}
+
+// Scroll reveal
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+var reveals = document.querySelectorAll('.reveal-element');
+for (var r = 0; r < reveals.length; r++) {
+  observer.observe(reveals[r]);
+}
+
+// Hero title sticky fade on scroll
+var heroTitle = document.getElementById('heroTitle');
+var heroSection = document.querySelector('.hero');
+var editorialSticky = document.getElementById('editorialSticky');
+var editorialSection = document.getElementById('relevanz');
+
+function handleStickyFades() {
+  var scrollY = window.scrollY;
+
+  // Hero title: fade out as user scrolls past 30-70% of viewport
+  if (heroTitle && heroSection) {
+    var heroH = heroSection.offsetHeight;
+    var fadeStart = heroH * 0.3;
+    var fadeEnd = heroH * 0.7;
+    if (scrollY <= fadeStart) {
+      heroTitle.style.opacity = '';
+      heroTitle.style.transform = '';
+    } else if (scrollY >= fadeEnd) {
+      heroTitle.style.opacity = '0';
+      heroTitle.style.transform = 'translateY(0)';
+    } else {
+      var progress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
+      heroTitle.style.opacity = String(1 - progress);
+      heroTitle.style.transform = 'translateY(0)';
+    }
+  }
+
+  // Editorial sticky: fade out when bottom of section approaches
+  if (editorialSticky && editorialSection) {
+    var rect = editorialSection.getBoundingClientRect();
+    var stickyRect = editorialSticky.getBoundingClientRect();
+    var stickyBottom = stickyRect.bottom;
+    var sectionBottom = rect.bottom;
+    var fadeZone = 200;
+    var remaining = sectionBottom - stickyBottom;
+
+    if (remaining < fadeZone && remaining > 0) {
+      editorialSticky.style.opacity = String(remaining / fadeZone);
+    } else if (remaining <= 0) {
+      editorialSticky.style.opacity = '0';
+    } else {
+      editorialSticky.style.opacity = '1';
+    }
+  }
+}
+
+window.addEventListener('scroll', handleStickyFades, { passive: true });
+handleStickyFades();
+</script>
+
+</body>
+</html>
