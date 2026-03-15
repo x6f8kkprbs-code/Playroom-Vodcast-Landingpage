@@ -2,6 +2,12 @@
    Playroom Studios – script.js
    ══════════════════════════════════════════════ */
 
+// Bei Reload immer nach oben scrollen
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ─── Scroll Reveal ─── */
@@ -159,6 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.classList.remove('autoplaying');
     wrapper.classList.add('playing');
 
+    // Restart from beginning via Vimeo postMessage API
+    iframe.contentWindow.postMessage(JSON.stringify({
+      method: 'seekTo',
+      value: 0
+    }), '*');
+
     // Unmute via Vimeo postMessage API
     iframe.contentWindow.postMessage(JSON.stringify({
       method: 'setVolume',
@@ -280,6 +292,12 @@ document.addEventListener('DOMContentLoaded', () => {
         body: formData,
         headers: { 'Accept': 'application/json' }
       }).then(response => {
+        if (typeof gtag === "function") {
+          gtag('event', 'lead', {
+            event_category: 'contact',
+            event_label: 'project_request'
+          });
+        }
         contactForm.style.display = 'none';
         contactModal.querySelector('.contact-modal-header').style.display = 'none';
         contactSuccess.style.display = 'block';
