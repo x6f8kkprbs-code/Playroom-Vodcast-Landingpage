@@ -37,14 +37,13 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: clip;
 }
 
 body {
   font-family: var(--font-body);
   background: var(--color-bg);
   color: var(--color-text-primary);
-  overflow-x: clip;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -192,7 +191,18 @@ ul, ol { list-style: none; }
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 14px 40px;
-  border-bottom: 1px solid rgba(245, 240, 232, 0.12);
+  border-bottom: 1px solid rgba(245, 240, 232, 0.10);
+}
+
+/* Prevent white line from border rendering */
+.nav::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-bg);
 }
 
 .nav-logo img {
@@ -274,7 +284,13 @@ ul, ol { list-style: none; }
   flex-direction: column;
   gap: 5px;
   padding: 4px;
-  z-index: 1001;
+  position: relative;
+  z-index: 1002;
+}
+
+/* Mobile Menu Overlay – outside nav for iOS */
+.mobile-menu-overlay {
+  display: none;
 }
 
 .nav-hamburger span {
@@ -1687,39 +1703,53 @@ ul, ol { list-style: none; }
     line-height: 1.6;
   }
 
-  /* Nav */
+  .nav-logo img {
+    height: 48px;
+  }
+
+  /* Nav – immer sichtbar auf Mobile */
   .nav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     padding: 16px 24px;
+    background: #0a0907;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 1px solid rgba(245, 240, 232, 0.08);
   }
 
   .nav.scrolled {
-    padding: 12px 24px;
+    padding: 16px 24px;
+    background: #0a0907;
+    border-bottom: 1px solid rgba(245, 240, 232, 0.08);
   }
 
   .nav-links {
-    display: none;
+    display: none !important;
   }
 
-  .nav-links.open {
+  .mobile-menu-overlay.open {
     display: flex;
     flex-direction: column;
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--color-bg);
+    width: 100%;
+    height: 100%;
+    background: #000000;
     padding: 100px 40px;
     gap: 32px;
-    z-index: 999;
+    z-index: 1001;
   }
 
-  .nav-links.open a {
+  .mobile-menu-overlay a {
     font-size: 28px;
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: 0.04em;
-    text-transform: none;
+    color: var(--color-text-primary);
+    text-decoration: none;
   }
 
   .nav-hamburger {

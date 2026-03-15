@@ -85,19 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ─── Mobile Navigation ─── */
   const hamburger = document.querySelector('.nav-hamburger');
-  const navLinksContainer = document.querySelector('.nav-links');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-  if (hamburger) {
+  if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
-      navLinksContainer.classList.toggle('open');
-      document.body.style.overflow = navLinksContainer.classList.contains('open') ? 'hidden' : '';
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
     });
 
-    navLinksContainer.querySelectorAll('a').forEach(link => {
+    mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
-        navLinksContainer.classList.remove('open');
+        mobileMenu.classList.remove('open');
         document.body.style.overflow = '';
       });
     });

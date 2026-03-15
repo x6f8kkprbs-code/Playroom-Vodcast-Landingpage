@@ -27,7 +27,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Poppins:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
 <!-- Styles -->
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=13">
 
 <!-- Scroll to top on reload -->
 <script>
@@ -144,7 +144,7 @@ window.scrollTo(0, 0);
   <a href="https://playroom-studios.com" target="_blank" rel="noopener" class="nav-logo" aria-label="Playroom Studios – Webseite">
     <img src="docs/logo_playroom_white.png" alt="Playroom Studios Logo" width="160" height="32">
   </a>
-  <div class="nav-links">
+  <div class="nav-links nav-links--desktop">
     <a href="#start" class="nav-top-link" aria-label="Nach oben scrollen">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </a>
@@ -161,6 +161,14 @@ window.scrollTo(0, 0);
   </button>
 </nav>
 
+<!-- Mobile Menu Overlay (outside nav for iOS compatibility) -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+  <a href="#studio">Studio</a>
+  <a href="#produktion">Produktion</a>
+  <a href="#leistungen">Leistungen</a>
+  <a href="#einblick">Einblick</a>
+  <a href="#kontakt">Kontakt</a>
+</div>
 <!-- ═══ 1. HERO ═══ -->
 <section class="hero" id="start">
   <div class="hero-bg">
@@ -681,7 +689,8 @@ window.scrollTo(0, 0);
   </div>
 </div>
 
+
 <!-- Script -->
-<script src="script.js?v=4"></script>
+<script src="script.js?v=5"></script>
 </body>
 </html>
