@@ -1,0 +1,26 @@
+# ═══════════════════════════════════════════════════════════
+# Cache-Strategie
+# HTML wird nie gecacht (immer frisch validiert), damit iOS nicht
+# zwischen altem und neuem Stand wechselt. Statische Assets sind
+# ueber ?v=… versioniert und duerfen lange gecacht werden.
+# ═══════════════════════════════════════════════════════════
+
+<IfModule mod_headers.c>
+  # HTML: niemals cachen
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # Statische, versionierte Assets: lange cachen
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|svg|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# ETags abschalten, damit HTML nicht ueber ETag doch noch gecacht wird
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
