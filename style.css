@@ -43,7 +43,9 @@ body {
   font-family: var(--font-body);
   background: var(--color-bg);
   color: var(--color-text-primary);
-  overflow-x: hidden;
+  /* clip statt hidden: verhindert horizontalen Overflow, bricht aber NICHT
+     position:fixed auf iOS Safari (sonst landet der Cookie-Banner mitten im Dokument) */
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -1593,16 +1595,15 @@ ul, ol { list-style: none; }
    ══════════════════════════════════════════════ */
 .cookie-banner {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 11000;
   isolation: isolate;
   display: flex;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  min-height: 100dvh;
   padding: 24px;
-  overflow-y: auto;
+  padding-top: calc(24px + env(safe-area-inset-top));
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s ease;
@@ -1985,7 +1986,7 @@ ul, ol { list-style: none; }
   /* Cookie */
   .cookie-banner {
     padding: 16px;
-    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    padding-top: calc(16px + env(safe-area-inset-top));
   }
 
   .cookie-buttons {
