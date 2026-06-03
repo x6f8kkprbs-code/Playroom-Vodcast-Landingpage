@@ -1329,11 +1329,11 @@ ul, ol { list-style: none; }
 .contact-modal-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10, 9, 7, 0.85);
 }
 
-/* Blur nur im offenen Zustand -> kein liegender backdrop-filter wenn geschlossen */
+/* Scrim UND Blur nur im offenen Zustand -> kein liegender dunkler Layer wenn geschlossen */
 .contact-modal.open .contact-modal-overlay {
+  background: rgba(10, 9, 7, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -1619,11 +1619,11 @@ ul, ol { list-style: none; }
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: rgba(0,0,0,0.7);
 }
 
-/* Blur nur solange das Banner sichtbar ist -> kein iOS-Geister-Blur beim Faden */
+/* Scrim UND Blur nur solange das Banner sichtbar ist -> kein iOS-Geister-Layer beim Faden */
 .cookie-banner.show::before {
+  background: rgba(0,0,0,0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
