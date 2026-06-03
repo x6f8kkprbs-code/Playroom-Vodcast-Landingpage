@@ -1316,6 +1316,11 @@ ul, ol { list-style: none; }
   transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
+/* Pre-CSS / closed state: vollständig aus dem Render-Tree (kein FOUC, kein blur) */
+.contact-modal[hidden] {
+  display: none;
+}
+
 .contact-modal.open {
   opacity: 1;
   visibility: visible;
@@ -1325,6 +1330,10 @@ ul, ol { list-style: none; }
   position: absolute;
   inset: 0;
   background: rgba(10, 9, 7, 0.85);
+}
+
+/* Blur nur im offenen Zustand -> kein liegender backdrop-filter wenn geschlossen */
+.contact-modal.open .contact-modal-overlay {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -1599,12 +1608,22 @@ ul, ol { list-style: none; }
   transition: opacity 0.5s ease;
 }
 
+/* Pre-CSS / dismissed: display:none entfernt das backdrop-filter::before komplett
+   aus dem Compositor — verhindert den iOS-Geister-Blur, der liegen bleibt */
+.cookie-banner[hidden] {
+  display: none;
+}
+
 .cookie-banner::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 0;
   background: rgba(0,0,0,0.7);
+}
+
+/* Blur nur solange das Banner sichtbar ist -> kein iOS-Geister-Blur beim Faden */
+.cookie-banner.show::before {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -1966,6 +1985,11 @@ ul, ol { list-style: none; }
   /* Cookie */
   .cookie-banner {
     padding: 16px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .cookie-buttons {
+    pointer-events: auto;
   }
 
   .cookie-banner-inner {

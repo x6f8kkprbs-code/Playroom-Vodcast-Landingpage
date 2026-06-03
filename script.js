@@ -134,6 +134,43 @@ document.addEventListener('DOMContentLoaded', () => {
     return localStorage.getItem('playroom_cookie_consent') === 'accepted';
   }
 
+  // Wurde überhaupt schon entschieden (accepted ODER declined)?
+  function hasConsentDecision() {
+    return localStorage.getItem('playroom_cookie_consent') !== null;
+  }
+
+  // Defensiv: garantiert, dass kein Overlay (Cookie/Modal) mehr Blur trägt
+  // oder den Scroll sperrt, wenn nichts offen sein soll.
+  function clearOverlays() {
+    document.body.style.overflow = '';
+    if (cookieBanner && !cookieBanner.classList.contains('show')) {
+      cookieBanner.setAttribute('hidden', '');
+    }
+    const modal = document.getElementById('contactModal');
+    if (modal && !modal.classList.contains('open')) {
+      modal.setAttribute('hidden', '');
+    }
+  }
+
+  // Cookie-Banner einblenden (Pre-CSS-hidden entfernen, dann Fade)
+  function showCookieBanner() {
+    if (!cookieBanner) return;
+    cookieBanner.removeAttribute('hidden');
+    void cookieBanner.offsetWidth; // Reflow erzwingen, damit der Fade läuft
+    cookieBanner.classList.add('show');
+  }
+
+  // Cookie-Banner komplett entfernen: erst Fade, dann display:none via [hidden]
+  // -> der backdrop-filter::before verschwindet aus dem Compositor.
+  function dismissCookieBanner() {
+    if (!cookieBanner) return;
+    cookieBanner.classList.remove('show');
+    setTimeout(() => {
+      cookieBanner.setAttribute('hidden', '');
+      clearOverlays();
+    }, 520);
+  }
+
   const videoOverlay = document.querySelector('.video-play-overlay');
 
   function loadVideo() {
@@ -178,17 +215,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }), '*');
   }
 
-  // Show cookie banner if no consent yet
-  if (!hasConsent() && cookieBanner) {
-    setTimeout(() => cookieBanner.classList.add('show'), 1500);
-  } else if (hasConsent()) {
-    loadVideo();
+  // Beim Load zuerst Consent prüfen.
+  // Entscheidung bereits getroffen (accepted ODER declined) -> Banner/Blur GAR NICHT zeigen.
+  if (hasConsentDecision()) {
+    clearOverlays();
+    if (hasConsent()) loadVideo();
+  } else if (cookieBanner) {
+    setTimeout(showCookieBanner, 1500);
   }
 
   if (cookieAccept) {
     cookieAccept.addEventListener('click', () => {
       localStorage.setItem('playroom_cookie_consent', 'accepted');
-      cookieBanner.classList.remove('show');
+      dismissCookieBanner();
       loadVideo();
     });
   }
@@ -196,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cookieDecline) {
     cookieDecline.addEventListener('click', () => {
       localStorage.setItem('playroom_cookie_consent', 'declined');
-      cookieBanner.classList.remove('show');
+      dismissCookieBanner();
     });
   }
 
@@ -211,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
           loadVideo();
         }
       } else if (cookieBanner) {
-        cookieBanner.classList.add('show');
+        showCookieBanner();
       }
     });
   }
@@ -222,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (hasConsent()) {
         loadVideo();
       } else if (cookieBanner) {
-        cookieBanner.classList.add('show');
+        showCookieBanner();
       }
     });
   }
@@ -232,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cookieSettingsLink && cookieBanner) {
     cookieSettingsLink.addEventListener('click', (e) => {
       e.preventDefault();
-      cookieBanner.classList.add('show');
+      showCookieBanner();
     });
   }
 
@@ -251,8 +290,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactSuccess = document.getElementById('contactSuccess');
 
   function openContactModal(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (contactModal) {
+      contactModal.removeAttribute('hidden');
+      void contactModal.offsetWidth; // Reflow, damit der Fade läuft
       contactModal.classList.add('open');
       contactModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -264,6 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
       contactModal.classList.remove('open');
       contactModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      // Nach dem Fade vollständig aus dem Render-Tree (kein liegender Blur)
+      setTimeout(() => {
+        if (!contactModal.classList.contains('open')) {
+          contactModal.setAttribute('hidden', '');
+        }
+      }, 450);
     }
   }
 
