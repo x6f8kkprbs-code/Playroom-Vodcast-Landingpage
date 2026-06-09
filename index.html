@@ -24,10 +24,10 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Poppins:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 
 <!-- Styles -->
-<link rel="stylesheet" href="style.css?v=17">
+<link rel="stylesheet" href="style.css?v=28">
 
 <!-- Scroll to top on reload -->
 <script>
@@ -151,7 +151,6 @@ window.scrollTo(0, 0);
     <a href="#studio">Studio</a>
     <a href="#produktion">Produktion</a>
     <a href="#leistungen">Leistungen</a>
-    <a href="#einblick">Einblick</a>
     <a href="#kontakt">Kontakt</a>
   </div>
   <button class="nav-hamburger" aria-label="Menü öffnen" aria-expanded="false">
@@ -166,17 +165,19 @@ window.scrollTo(0, 0);
   <a href="#studio">Studio</a>
   <a href="#produktion">Produktion</a>
   <a href="#leistungen">Leistungen</a>
-  <a href="#einblick">Einblick</a>
   <a href="#kontakt">Kontakt</a>
 </div>
 <!-- ═══ 1. HERO ═══ -->
 <section class="hero" id="start">
   <div class="hero-bg">
-    <img src="docs/optimized/Vodcast01-30-hero-desktop.webp" srcset="docs/optimized/Vodcast01-30-hero-mobile.webp 960w, docs/optimized/Vodcast01-30-hero-desktop.webp 1920w" sizes="100vw" alt="Videopodcast-Studio von Playroom Studios Frankfurt mit professionellem Lichtsetup" width="1920" height="1080" fetchpriority="high">
+    <picture>
+      <source media="(max-width: 768px)" srcset="docs/optimized/Vodcast01-17-hero-mobile.webp" width="1080" height="1350">
+      <img src="docs/optimized/Vodcast01-30-hero-desktop.webp" srcset="docs/optimized/Vodcast01-30-hero-mobile.webp 960w, docs/optimized/Vodcast01-30-hero-desktop.webp 1920w" sizes="100vw" alt="Videopodcast-Studio von Playroom Studios Frankfurt mit professionellem Lichtsetup" width="1920" height="1080" fetchpriority="high">
+    </picture>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-label">Playroom Studios &ndash; Frankfurt am Main</div>
+    <div class="hero-label">Playroom Studios, Frankfurt am Main</div>
     <h1>Podcast- und Videopodcast-Produktionen f&uuml;r Unternehmen</h1>
     <h2 class="hero-h2">Wenn Menschen zuh&ouml;ren sollen, braucht es mehr als Pr&auml;sentationen. Es braucht Gespr&auml;che.</h2>
     <div class="hero-ctas">
@@ -194,8 +195,8 @@ window.scrollTo(0, 0);
 <!-- ═══ STATEMENT ═══ -->
 <section class="section statement-section">
   <div class="container">
-    <p class="statement-text reveal-element">Wir wissen, was Unternehmen brauchen &ndash; und wie man es umsetzt, ohne dass es sich kompliziert anf&uuml;hlt.</p>
-    <p class="statement-text reveal-element"><a href="https://playroom-studios.com" target="_blank" rel="noopener">Playroom Studios</a> produziert seit &uuml;ber 20 Jahren Audio- und Kommunikationsformate f&uuml;r Marken, Unternehmen und&nbsp;Agenturen.</p>
+    <p class="statement-text reveal-element">Professioneller Podcast- und Videocontent muss nicht kompliziert sein.</p>
+    <p class="statement-text reveal-element">Seit &uuml;ber 20 Jahren produziert <a href="https://playroom-studios.com" target="_blank" rel="noopener">Playroom Studios</a> Inhalte f&uuml;r Unternehmen, Marken und Agenturen. Wir wissen, welche Prozesse funktionieren, worauf es intern ankommt und wie man Produktionen effizient umsetzt.</p>
   </div>
 </section>
 
@@ -203,13 +204,14 @@ window.scrollTo(0, 0);
 <section class="section section--alt" id="einsatz">
   <div class="container">
     <div class="reveal-element">
-      <div class="section-label">Einsatzbereiche</div>
+      <div class="section-kicker">Einsatzbereiche</div>
+      <div class="section-rule"></div>
       <h2 class="section-heading">Ein Videopodcast. So viele M&ouml;glichkeiten.</h2>
     </div>
     <div class="usecases-grid">
       <div class="usecase-item reveal-element">
         <div class="usecase-title">Leadership-Kommunikation</div>
-        <div class="usecase-text">Gespr&auml;che mit der Unternehmensf&uuml;hrung &uuml;ber Strategie, Quartalsergebnisse oder Ver&auml;nderungen &ndash; direkt, pers&ouml;nlich und nah an den Mitarbeitenden.</div>
+        <div class="usecase-text">Gespr&auml;che mit der Unternehmensf&uuml;hrung &uuml;ber Strategie, Quartalsergebnisse oder Ver&auml;nderungen, direkt, pers&ouml;nlich und nah an den Mitarbeitenden.</div>
       </div>
       <div class="usecase-item reveal-element">
         <div class="usecase-title">Expert Sessions</div>
@@ -217,19 +219,19 @@ window.scrollTo(0, 0);
       </div>
       <div class="usecase-item reveal-element">
         <div class="usecase-title">Employer Branding &amp; Recruiting</div>
-        <div class="usecase-text">Mitarbeitende erz&auml;hlen von ihrer Arbeit, ihrem Alltag und ihren Erfahrungen im Unternehmen &ndash; pers&ouml;nlich und glaubw&uuml;rdig.</div>
+        <div class="usecase-text">Mitarbeitende erz&auml;hlen von ihrer Arbeit, ihrem Alltag und ihren Erfahrungen im Unternehmen, pers&ouml;nlich und glaubw&uuml;rdig.</div>
       </div>
       <div class="usecase-item reveal-element">
         <div class="usecase-title">Produktkommunikation &amp; Vertrieb</div>
-        <div class="usecase-text">Neue Produkte, Marktentwicklungen oder Erfahrungen aus dem Vertrieb &ndash; regelm&auml;&szlig;ig produziert und f&uuml;r interne oder externe Kan&auml;le nutzbar.</div>
+        <div class="usecase-text">Neue Produkte, Marktentwicklungen oder Erfahrungen aus dem Vertrieb, regelm&auml;&szlig;ig produziert und f&uuml;r interne oder externe Kan&auml;le nutzbar.</div>
       </div>
       <div class="usecase-item reveal-element">
         <div class="usecase-title">Markt &amp; Wirtschaft</div>
-        <div class="usecase-text">Experten aus dem Unternehmen ordnen Entwicklungen in M&auml;rkten, Politik oder Wirtschaft ein &ndash; als regelm&auml;&szlig;iges Gespr&auml;chsformat.</div>
+        <div class="usecase-text">Experten aus dem Unternehmen ordnen Entwicklungen in M&auml;rkten, Politik oder Wirtschaft ein, als regelm&auml;&szlig;iges Gespr&auml;chsformat.</div>
       </div>
       <div class="usecase-item reveal-element">
         <div class="usecase-title">Testimonial-Formate</div>
-        <div class="usecase-text">Gespr&auml;che mit Pers&ouml;nlichkeiten aus Wirtschaft, Sport oder Kultur &ndash; als wiederkehrendes Format mit klarer Perspektive.</div>
+        <div class="usecase-text">Gespr&auml;che mit Pers&ouml;nlichkeiten aus Wirtschaft, Sport oder Kultur, als wiederkehrendes Format mit klarer Perspektive.</div>
       </div>
     </div>
   </div>
@@ -239,12 +241,13 @@ window.scrollTo(0, 0);
 <section class="section" id="studio">
   <div class="container">
     <div class="reveal-element">
-      <div class="section-label">Das Studio</div>
-      <h2 class="section-heading">Ein Aufnahmeraum, der f&uuml;r Gespr&auml;che gebaut wurde &ndash; der <span class="brand-word">playroom.</span></h2>
+      <div class="section-kicker">Das Studio</div>
+      <div class="section-rule"></div>
+      <h2 class="section-heading">Ein Aufnahmeraum, der f&uuml;r Gespr&auml;che gebaut wurde, der <span class="brand-word">playroom.</span></h2>
     </div>
     <div class="studio-text reveal-element">
       <p class="section-text">Willkommen im <span class="brand-word">playroom.</span></p>
-      <p class="section-text">Seit 2013 produzieren wir auf der Hanauer Landstra&szlig;e &ndash; urspr&uuml;nglich f&uuml;r Werbung und Postproduktion, heute auch Podcasts. Was sich nicht ver&auml;ndert hat: Hier entstehen Gespr&auml;che unter professionellen Produktionsbedingungen.</p>
+      <p class="section-text">Seit 2013 produzieren wir auf der Hanauer Landstra&szlig;e, urspr&uuml;nglich f&uuml;r Werbung und Postproduktion, heute auch Podcasts. Was sich nicht ver&auml;ndert hat: Hier entstehen Gespr&auml;che unter professionellen Produktionsbedingungen.</p>
       <p class="section-text">W&auml;hrend der Aufnahme k&uuml;mmern wir uns um Technik, Ablauf und Produktion.</p>
     </div>
     <div class="studio-images reveal-element">
@@ -257,7 +260,7 @@ window.scrollTo(0, 0);
         <figcaption>Fokus-Setup</figcaption>
       </figure>
     </div>
-    <div class="sub-headline reveal-element">Zwei Setups &ndash; ein Studio</div>
+    <div class="sub-headline reveal-element">Zwei Setups, ein Studio</div>
     <div class="studio-setups reveal-element">
       <div class="setup-item">
         <div class="setup-name">Lounge-Setup</div>
@@ -288,11 +291,12 @@ window.scrollTo(0, 0);
         </figure>
       </div>
       <div class="two-col-text reveal-element">
-        <div class="section-label">4K Produktion</div>
+        <div class="section-kicker">4K Produktion</div>
+      <div class="section-rule"></div>
         <h2 class="section-heading">Bild und Ton auf Produktionsniveau</h2>
         <p>Neben klassischen Audio-Formaten produziert Playroom Studios auch Videopodcasts mit einem professionellen Mehrkamera-Setup in 4K. Die Kameraeinstellungen werden bereits in der Produktionsplanung auf die jeweilige Gespr&auml;chssituation abgestimmt.</p>
         <p>Die Podcast- und Videopodcast-Produktion findet im Studio in Frankfurt am Main statt und ist auf Gespr&auml;chsformate f&uuml;r Unternehmen ausgelegt.</p>
-        <p>So entstehen Formate, die auf YouTube, LinkedIn oder internen Unternehmensplattformen eingesetzt werden k&ouml;nnen &ndash; mit kontrollierter Bild- und Tonqualit&auml;t, wie sie bei einfachen Setups oft nicht erreichbar ist.</p>
+        <p>So entstehen Formate, die auf YouTube, LinkedIn oder internen Unternehmensplattformen eingesetzt werden k&ouml;nnen, mit kontrollierter Bild- und Tonqualit&auml;t, wie sie bei einfachen Setups oft nicht erreichbar ist.</p>
         <div class="feature-line">Mehrkamera-Setup · 4K Auflösung · Remote-Zuschaltung · Prompter-Option</div>
       </div>
     </div>
@@ -303,7 +307,8 @@ window.scrollTo(0, 0);
 <section class="section" id="warum">
   <div class="container">
     <div class="reveal-element">
-      <div class="section-label">Warum Playroom Studios</div>
+      <div class="section-kicker">Warum Playroom Studios</div>
+      <div class="section-rule"></div>
       <h2 class="section-heading">Was unsere Podcast-Produktionen unterscheidet</h2>
     </div>
     <div class="diff-grid">
@@ -325,7 +330,7 @@ window.scrollTo(0, 0);
       <div class="diff-item reveal-element">
         <div class="diff-number">04</div>
         <div class="diff-title">Repr&auml;sentative Atmosph&auml;re</div>
-        <div class="diff-text">Vor und nach der Aufnahme steht ein Loungebereich zur Verf&uuml;gung &ndash; f&uuml;r Vorbereitung, Teamgespr&auml;che oder die Nachbesprechung mit internen Stakeholdern.</div>
+        <div class="diff-text">Vor und nach der Aufnahme steht ein Loungebereich zur Verf&uuml;gung, f&uuml;r Vorbereitung, Teamgespr&auml;che oder die Nachbesprechung mit internen Stakeholdern.</div>
       </div>
       <div class="diff-item reveal-element">
         <div class="diff-number">05</div>
@@ -340,7 +345,8 @@ window.scrollTo(0, 0);
 <section class="section section--alt" id="produktion">
   <div class="container">
     <div class="reveal-element">
-      <div class="section-label">Produktionsablauf</div>
+      <div class="section-kicker">Produktionsablauf</div>
+      <div class="section-rule"></div>
       <h2 class="section-heading">So läuft eine Produktion ab</h2>
     </div>
     <div class="process-steps">
@@ -352,12 +358,12 @@ window.scrollTo(0, 0);
       <div class="process-step reveal-element">
         <div class="step-number">02</div>
         <div class="step-title">Konzept &amp; Formatentwicklung</div>
-        <div class="step-text">Entwicklung oder Verfeinerung des Formats &ndash; mit Struktur, Gespr&auml;chsleitfaden, Setup-Entscheidung und Redaktionsplanung.</div>
+        <div class="step-text">Entwicklung oder Verfeinerung des Formats, mit Struktur, Gespr&auml;chsleitfaden, Setup-Entscheidung und Redaktionsplanung.</div>
       </div>
       <div class="process-step reveal-element">
         <div class="step-number">03</div>
         <div class="step-title">Studioaufnahme</div>
-        <div class="step-text">Professionelle Aufnahme im akustisch optimierten Studio in Frankfurt &ndash; mit vollem technischem Support und nach Bedarf redaktioneller Begleitung.</div>
+        <div class="step-text">Professionelle Aufnahme im akustisch optimierten Studio in Frankfurt, mit vollem technischem Support und nach Bedarf redaktioneller Begleitung.</div>
       </div>
       <div class="process-step reveal-element">
         <div class="step-number">04</div>
@@ -367,7 +373,7 @@ window.scrollTo(0, 0);
       <div class="process-step reveal-element">
         <div class="step-number">05</div>
         <div class="step-title">Auslieferung</div>
-        <div class="step-text">Finale Dateien in allen benötigten Formaten &ndash; für YouTube, Spotify, Apple Podcasts, LinkedIn oder interne Plattformen.</div>
+        <div class="step-text">Finale Dateien in allen benötigten Formaten, für YouTube, Spotify, Apple Podcasts, LinkedIn oder interne Plattformen.</div>
       </div>
     </div>
   </div>
@@ -377,7 +383,8 @@ window.scrollTo(0, 0);
 <section class="section" id="leistungen">
   <div class="container">
     <div class="reveal-element">
-      <div class="section-label">Full Service</div>
+      <div class="section-kicker">Full Service</div>
+      <div class="section-rule"></div>
       <h2 class="section-heading">Einzelne Schritte oder der komplette Weg</h2>
     </div>
     <p class="service-intro reveal-element">Je nach Projektumfang und internen Ressourcen übernimmt Playroom Studios einzelne Produktionsschritte oder begleitet ein Format von der ersten Idee bis zur Veröffentlichung.</p>
@@ -412,7 +419,8 @@ window.scrollTo(0, 0);
 <section class="section section--alt" id="kreativ">
   <div class="container">
     <div class="reveal-element">
-      <div class="section-label">Kreative Erweiterungen</div>
+      <div class="section-kicker">Kreative Erweiterungen</div>
+      <div class="section-rule"></div>
       <h2 class="section-heading">Wenn das Format eine eigene Identität braucht</h2>
     </div>
     <p class="service-intro reveal-element">Ein Videopodcast wird dann unverwechselbar, wenn Inhalt, Bild und Klang zusammen eine klare Identit&auml;t bilden. Playroom Studios unterst&uuml;tzt bei Bedarf auch bei der kreativen Gestaltung des Formats.</p>
@@ -437,34 +445,12 @@ window.scrollTo(0, 0);
   </div>
 </section>
 
-<!-- ═══ 10. EINBLICK (VIDEO) ═══ -->
-<section class="section video-section" id="einblick">
-  <div class="container">
-    <div class="reveal-element" style="text-align: center; margin-bottom: 48px;">
-      <div class="section-label">Einblick</div>
-      <h2 class="section-heading">Ein Einblick in die Produktion</h2>
-    </div>
-    <div class="video-wrapper reveal-element" data-video-src="https://player.vimeo.com/video/1173310023?dnt=1&autoplay=1&muted=1&loop=1&background=0&title=0&byline=0&portrait=0">
-      <div class="video-placeholder" role="button" aria-label="Video abspielen">
-        <img src="docs/optimized/Vodcast01-16-1200.webp" alt="Vorschau der Videopodcast-Produktion im Studio von Playroom Studios Frankfurt" width="1200" height="675" loading="lazy" decoding="async">
-      </div>
-      <div class="video-play-overlay" role="button" aria-label="Video mit Ton abspielen">
-        <div class="play-btn-designed">
-          <div class="play-btn-ring"></div>
-          <svg viewBox="0 0 24 24" fill="none"><polygon points="9,5 20,12 9,19" fill="currentColor"/></svg>
-        </div>
-        <span class="play-btn-label">Video abspielen</span>
-      </div>
-    </div>
-    <div class="video-caption reveal-element">Playroom Studios &middot; Videopodcast-Produktion in Frankfurt</div>
-  </div>
-</section>
-
 <!-- ═══ 11. ATMOSPHÄRE / GALLERY ═══ -->
-<section class="section" id="atmosphaere">
+<section class="section section--alt" id="atmosphaere">
   <div class="container">
     <div class="reveal-element" style="margin-bottom: 48px;">
-      <div class="section-label">Studio Atmosphäre</div>
+      <div class="section-kicker">Studio Atmosphäre</div>
+      <div class="section-rule"></div>
       <h2 class="section-heading">Gute Gespr&auml;che brauchen die richtige Umgebung.</h2>
     </div>
     <div class="gallery-grid reveal-element">
@@ -485,10 +471,11 @@ window.scrollTo(0, 0);
 </section>
 
 <!-- ═══ 12. FAQ ═══ -->
-<section class="section section--alt" id="faq">
+<section class="section" id="faq">
   <div class="container">
-    <div class="reveal-element" style="text-align: center; margin-bottom: 48px;">
-      <div class="section-label">FAQ</div>
+    <div class="reveal-element" style="margin-bottom: 48px;">
+      <div class="section-kicker">FAQ</div>
+      <div class="section-rule"></div>
       <h2 class="section-heading">Häufige Fragen zur Produktion</h2>
     </div>
     <div class="faq-wrap reveal-element">
@@ -548,7 +535,7 @@ window.scrollTo(0, 0);
         </button>
         <div class="faq-answer" id="faq-5" role="region">
           <p>Ja. Viele Formate entstehen in Unternehmen, die dieses Medium zum ersten Mal nutzen.</p>
-          <p>Am Anfang steht ein Gespr&auml;ch &uuml;ber Ziele, Inhalte und m&ouml;gliche Formate. Die Produktion kann dabei an die vorhandenen Ressourcen im Unternehmen angepasst werden &ndash; von der Konzeptentwicklung bis zur redaktionellen Begleitung.</p>
+          <p>Am Anfang steht ein Gespr&auml;ch &uuml;ber Ziele, Inhalte und m&ouml;gliche Formate. Die Produktion kann dabei an die vorhandenen Ressourcen im Unternehmen angepasst werden, von der Konzeptentwicklung bis zur redaktionellen Begleitung.</p>
         </div>
       </div>
 
@@ -586,7 +573,7 @@ window.scrollTo(0, 0);
   <div class="final-cta-content reveal-element">
     <div class="final-cta-label">Let's Talk</div>
     <h2>Lassen Sie uns Ihr Podcastformat entwickeln.</h2>
-    <p class="final-cta-subline">Ob neue Formatidee oder konkretes Projekt &ndash; wir beraten Sie gern, wie sich Podcast- und Videopodcast-Formate in Ihrem Unternehmen sinnvoll umsetzen lassen.</p>
+    <p class="final-cta-subline">Ob neue Formatidee oder konkretes Projekt, wir beraten Sie gern, wie sich Podcast- und Videopodcast-Formate in Ihrem Unternehmen sinnvoll umsetzen lassen.</p>
     <a href="#" class="btn-primary open-contact-form">Projekt anfragen</a>
     <div class="final-cta-contact">
       <a href="tel:+496940806100">+49 69 4080 6100</a><br>
@@ -608,7 +595,6 @@ window.scrollTo(0, 0);
   <div class="footer-links">
     <a href="#" class="impressum-link">Impressum</a>
     <a href="../Playroom_Studios_Privacy_Policy_DE_EN.pdf" target="_blank" rel="noopener">Datenschutz</a>
-    <a href="#" class="cookie-settings-link">Cookie-Einstellungen</a>
   </div>
   <div class="footer-copy">Diese Seite ist ein Angebot von Playroom Studios in Frankfurt am Main. Weitere Informationen zum Studio finden Sie unter <a href="https://playroom-studios.com" target="_blank" rel="noopener">www.playroom-studios.com</a>.</div>
   <div class="footer-copy">&copy; 2026 Playroom Studios GmbH. Alle Rechte vorbehalten.</div>
@@ -622,7 +608,8 @@ window.scrollTo(0, 0);
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
     <div class="contact-modal-header">
-      <div class="section-label">Projektanfrage</div>
+      <div class="section-kicker">Projektanfrage</div>
+      <div class="section-rule"></div>
       <h3 class="contact-modal-title">Erzähl uns von deinem Vorhaben</h3>
       <p class="contact-modal-subtitle">Wir melden uns innerhalb von 24 Stunden bei dir.</p>
     </div>
@@ -679,19 +666,7 @@ window.scrollTo(0, 0);
   </div>
 </div>
 
-<!-- ═══ COOKIE BANNER ═══ -->
-<div class="cookie-banner" role="dialog" aria-label="Cookie-Hinweis" hidden>
-  <div class="cookie-banner-inner">
-    <p>Wir nutzen Cookies und externe Dienste, um diese Seite zu verbessern und Inhalte bereitzustellen.</p>
-    <div class="cookie-buttons">
-      <button class="cookie-accept">Akzeptieren</button>
-      <button class="cookie-decline">Nur notwendige</button>
-    </div>
-  </div>
-</div>
-
-
 <!-- Script -->
-<script src="script.js?v=7"></script>
+<script src="script.js?v=8"></script>
 </body>
 </html>
