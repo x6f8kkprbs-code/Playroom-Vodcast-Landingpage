@@ -386,7 +386,7 @@ ul, ol { list-style: none; }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(10,10,10,0.58) 0%, rgba(10,10,10,0.38) 45%, rgba(10,10,10,0.15) 100%);
+  background: radial-gradient(ellipse at center, rgba(10,10,10,0.42) 0%, rgba(10,10,10,0.26) 45%, rgba(10,10,10,0.08) 100%);
   z-index: 1;
 }
 
@@ -1660,7 +1660,7 @@ ul, ol { list-style: none; }
   }
 
   .hero-overlay {
-    background: linear-gradient(rgba(10,10,10,0.35), rgba(10,10,10,0.55));
+    background: linear-gradient(rgba(10,10,10,0.22), rgba(10,10,10,0.40));
   }
 
   .hero-bg img {
