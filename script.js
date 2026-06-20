@@ -163,9 +163,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // "Projekt anfragen" öffnet künftig den Anfrage-Bot (versteckter #bot-open Trigger).
+  // Ist der Bot nicht geladen, Fallback auf das klassische Formular.
+  const botOpenTrigger = document.getElementById('bot-open');
   document.querySelectorAll('.open-contact-form').forEach(btn => {
-    btn.addEventListener('click', openContactModal);
+    btn.addEventListener('click', (e) => {
+      if (e) e.preventDefault();
+      if (botOpenTrigger) {
+        botOpenTrigger.click();      // öffnet das Bot-Overlay
+      } else {
+        openContactModal(e);          // Fallback: altes Formular, falls Bot nicht geladen
+      }
+    });
   });
+
+  // Callback, den der Bot für "Zum Kontaktformular" aufruft: öffnet das klassische Modal.
+  window.ANFRAGE_BOT_ON_CLASSIC = function () {
+    openContactModal();
+  };
 
   if (contactModal) {
     contactModal.querySelector('.contact-modal-overlay').addEventListener('click', closeContactModal);
