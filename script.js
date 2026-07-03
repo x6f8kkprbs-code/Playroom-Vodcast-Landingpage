@@ -237,3 +237,54 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+// ════════════════════════════════════════
+// CUSTOM CURSOR — Play-Dreieck (nur Desktop/Maus)
+// Wie auf playroom-studios.com: folgt der Maus 1:1 ohne Lag
+// (direkt im mousemove platziert). Touch: deaktiviert.
+// ════════════════════════════════════════
+(function () {
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  if (!fine.matches) return;
+
+  var cursor = document.getElementById('prCursor');
+  if (!cursor) return;
+
+  var hoverSel = 'a, button, input, textarea, select, label, summary, [onclick], [role="button"]';
+
+  var tx = window.innerWidth / 2, ty = window.innerHeight / 2;
+  var active = false;
+
+  function place(x, y) {
+    cursor.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+  }
+
+  // Cursor-Färbung positionsbasiert bestimmen — robust gegen Scrollen bei
+  // stehender Maus. Orange-Statement → weiß, Paper-Sektion → orange, Rest dunkel (weiß).
+  function updateTone() {
+    var el = document.elementFromPoint(tx, ty);
+    var sec = el && el.closest ? el.closest('section') : null;
+    cursor.classList.toggle('cursor--on-orange', !!(sec && sec.classList.contains('statement-section')));
+    cursor.classList.toggle('cursor--on-light', !!(sec && sec.classList.contains('section--paper')));
+  }
+
+  document.addEventListener('mousemove', function (e) {
+    tx = e.clientX;
+    ty = e.clientY;
+    if (!active) {
+      active = true;
+      cursor.classList.add('is-active');
+    }
+    // Direkt, kein Lag — folgt der Maus 1:1 wie der native Cursor.
+    place(tx, ty);
+    var t = e.target && e.target.closest ? e.target.closest(hoverSel) : null;
+    cursor.classList.toggle('is-hover', !!t);
+    updateTone();
+  }, { passive: true });
+
+  // Bei stehender Maus und Scroll wechselt die Sektion unter dem Cursor — neu färben.
+  window.addEventListener('scroll', updateTone, { passive: true });
+
+  document.addEventListener('mouseleave', function () { cursor.classList.remove('is-active'); });
+  document.addEventListener('mouseenter', function () { if (active) cursor.classList.add('is-active'); });
+})();

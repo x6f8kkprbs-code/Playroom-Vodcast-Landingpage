@@ -1952,3 +1952,67 @@ ul, ol { list-style: none; }
     scroll-behavior: auto;
   }
 }
+
+/* ════════════════════════════════════════
+   CUSTOM CURSOR — Play-Dreieck (nur Desktop/Maus)
+   Wie auf playroom-studios.com: gefülltes Play-Dreieck in Paper-Weiß,
+   folgt der Maus 1:1 (kein Lag). Hover: wächst leicht und wird orange.
+   Färbung positionsbasiert: weiß über dunklen Sektionen und der
+   Orange-Statement-Fläche, orange über der Paper-Sektion (#leistungen).
+   ════════════════════════════════════════ */
+.pr-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+  display: none;
+}
+
+.pr-cursor.is-active { opacity: 1; }
+
+.pr-cursor__ring {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 17px;
+  background: #FAF7F2;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  transition: width 0.15s cubic-bezier(0.2, 0.7, 0.2, 1),
+              height 0.15s cubic-bezier(0.2, 0.7, 0.2, 1),
+              background-color 0.15s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.pr-cursor.is-hover .pr-cursor__ring {
+  width: 21px;
+  height: 24px;
+  background: #FF4A1B;
+}
+
+/* Über der Orange-Statement-Fläche: Dreieck weiß, auch im Hover. */
+.pr-cursor.cursor--on-orange .pr-cursor__ring { background: #FAF7F2; }
+.pr-cursor.cursor--on-orange.is-hover .pr-cursor__ring { background: #FAF7F2; }
+/* Über der hellen Paper-Sektion: Dreieck orange. */
+.pr-cursor.cursor--on-light .pr-cursor__ring { background: #FF4A1B; }
+.pr-cursor.cursor--on-light.is-hover .pr-cursor__ring { background: #FF4A1B; }
+
+/* Nur auf Desktop/Maus: Dreieck zeigen, nativen Cursor ausblenden */
+@media (hover: hover) and (pointer: fine) {
+  html, html * { cursor: none !important; }
+  .pr-cursor { display: block; }
+}
+
+/* Touch-Geräte: kompletter Verzicht, normaler Cursor */
+@media (hover: none), (pointer: coarse) {
+  .pr-cursor { display: none !important; }
+}
+
+/* Reduced motion: keine Größen-Animation */
+@media (prefers-reduced-motion: reduce) {
+  .pr-cursor__ring {
+    transition: background-color 0.12s linear;
+  }
+}
