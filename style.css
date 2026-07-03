@@ -468,15 +468,15 @@ ul, ol { list-style: none; }
 
 .hero-h2 {
   font-family: var(--pr-font-body);
-  font-size: 19px;
-  font-weight: 400;
+  font-size: 21px;
+  font-weight: 500;
   font-style: normal;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-primary);
-  opacity: 0.88;
-  max-width: 540px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55), 0 4px 24px rgba(0, 0, 0, 0.45);
+  max-width: 560px;
   margin: 32px auto 0;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.01em;
 }
 
 .hero-ctas {
@@ -1735,7 +1735,7 @@ ul, ol { list-style: none; }
   }
 
   .hero-h2 {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .hero-ctas {
