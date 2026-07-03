@@ -6,15 +6,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Studio-Licht: Cyan aus dem LED-Licht der Studiofotos, Rot nur als REC-Punkt */
-  --accent: #56C8DC;
-  --rec:    #FF3B30;
-  --bg-dark:        #0B0D10;
-  --bg-raise:       #11151C;
-  --text-primary:   #F2F5F7;
-  --text-secondary: #97A1AC;
-  --border:         rgba(151,177,199,0.14);
-  --ink:   #0B0D10;
+  /* Marken-Orange von playroom-studios.com, sparsam eingesetzt.
+     Basis: neutral-warmes Dunkel, kein Blaustich. */
+  --accent: #FF4A1B;
+  --bg-dark:        #0C0B0A;
+  --bg-raise:       #14120F;
+  --text-primary:   #FAF7F2;
+  --text-secondary: #A6A099;
+  --border:         rgba(245,240,235,0.12);
+  --ink:   #0C0B0A;
   --radius: 4px;
   --pr-font-display: "Archivo","Inter",-apple-system,BlinkMacSystemFont,sans-serif;
   --pr-font-body:    "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -158,7 +158,7 @@ ul, ol { list-style: none; }
 .statement-text a {
   color: var(--text-primary);
   text-decoration: none;
-  border-bottom: 1px solid rgba(86, 200, 220, 0.4);
+  border-bottom: 1px solid rgba(255, 74, 27, 0.4);
   padding-bottom: 2px;
   transition: color 0.3s ease, border-color 0.3s ease;
 }
@@ -289,7 +289,7 @@ ul, ol { list-style: none; }
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 1px solid rgba(86, 200, 220, 0.3);
+  border: 1px solid rgba(255, 74, 27, 0.35);
   border-radius: 50%;
   color: var(--accent);
   transition: background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
@@ -303,7 +303,7 @@ ul, ol { list-style: none; }
 }
 
 .nav-top-link:hover {
-  background: rgba(86, 200, 220, 0.12);
+  background: rgba(255, 74, 27, 0.1);
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -368,7 +368,7 @@ ul, ol { list-style: none; }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(8,10,14,0.42) 0%, rgba(8,10,14,0.26) 45%, rgba(8,10,14,0.08) 100%);
+  background: radial-gradient(ellipse at center, rgba(12,11,10,0.42) 0%, rgba(12,11,10,0.26) 45%, rgba(12,11,10,0.08) 100%);
   z-index: 1;
 }
 
@@ -422,7 +422,7 @@ ul, ol { list-style: none; }
   justify-content: center;
 }
 
-/* Primär-Button: hell, mit REC-Punkt. Rot kommt nirgendwo sonst vor. */
+/* Primär-Button: hell, mit REC-Punkt im Marken-Orange */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -446,7 +446,7 @@ ul, ol { list-style: none; }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--rec);
+  background: var(--accent);
   flex: none;
 }
 
@@ -1342,7 +1342,7 @@ ul, ol { list-style: none; }
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(86, 200, 220, 0.12);
+  box-shadow: 0 0 0 3px rgba(255, 74, 27, 0.12);
 }
 
 .form-group select {
