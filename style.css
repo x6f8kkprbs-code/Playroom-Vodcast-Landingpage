@@ -6,9 +6,13 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Marken-Orange von playroom-studios.com, sparsam eingesetzt.
-     Basis: neutral-warmes Dunkel, kein Blaustich. */
+  /* Designsprache von playroom-studios.com:
+     Marken-Orange, Ton-in-Ton-Kapiteltitel, eine Orange- und eine Paper-Flaeche */
   --accent: #FF4A1B;
+  --accent-dim: #40140B;       /* Kapiteltitel Ton-in-Ton auf Dunkel */
+  --accent-deep: #6B1D05;      /* Text auf der Orange-Flaeche */
+  --paper: #F2EDE4;
+  --paper-title: #E4A78F;      /* Kapiteltitel Ton-in-Ton auf Paper */
   --bg-dark:        #0C0B0A;
   --bg-raise:       #14120F;
   --text-primary:   #FAF7F2;
@@ -62,33 +66,51 @@ ul, ol { list-style: none; }
 }
 
 /* ─── Shared Typography ─── */
-/* Timecode: die Seite liest sich wie eine Episode, Sektionen sind Kapitelmarken */
-.tc {
-  font-family: var(--pr-font-mono);
-  color: var(--accent);
-  font-style: normal;
-}
-
+/* Kicker + kurze Linie: das Label-Device der Studioseite */
 .section-kicker {
   font-family: var(--pr-font-mono);
-  font-size: .78rem;
+  font-size: .75rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: .12em;
-  color: var(--text-secondary);
+  letter-spacing: .18em;
+  color: var(--accent);
   margin-bottom: 1.4rem;
+}
+
+.section-kicker::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--accent);
+  margin-top: 12px;
+}
+
+/* Riesiger Ton-in-Ton-Kapiteltitel wie WORK / SERVICES / INSIGHTS
+   auf playroom-studios.com */
+.section-title {
+  font-family: var(--pr-font-display);
+  font-size: clamp(56px, 9vw, 128px);
+  font-weight: 800;
+  font-stretch: 105%;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--accent-dim);
+  margin-bottom: 28px;
+  user-select: none;
 }
 
 .section-heading {
   font-family: var(--pr-font-display);
-  font-size: 44px;
+  font-size: 32px;
   font-weight: 600;
-  font-stretch: 108%;
-  letter-spacing: -0.015em;
-  line-height: 1.12;
+  font-stretch: 105%;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
   color: var(--text-primary);
   margin-bottom: 28px;
-  max-width: 760px;
+  max-width: 680px;
 }
 
 .section-text {
@@ -106,14 +128,58 @@ ul, ol { list-style: none; }
   color: var(--text-primary);
 }
 
-/* Alt-Sektionen: kein Hell/Dunkel-Flip mehr, nur eine leicht blau getönte Tonstufe */
+/* Alt-Sektionen: eine warme Tonstufe ueber dem Grund */
 .section--alt {
   background: var(--bg-raise);
   color: var(--text-primary);
 }
 
+/* Paper-Sektion: das helle Services-Device der Studioseite, genau einmal */
+.section--paper {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.section--paper .section-title {
+  color: var(--paper-title);
+}
+
+.section--paper .section-heading {
+  color: var(--ink);
+}
+
+.section--paper .section-text,
+.section--paper .service-intro {
+  color: rgba(12, 11, 10, 0.72);
+}
+
+.section--paper .section-kicker {
+  color: #B33A16;
+}
+
+.section--paper .section-kicker::after {
+  background: #B33A16;
+}
+
+.section--paper .service-column {
+  background: transparent;
+  border-left-color: var(--accent);
+}
+
+.section--paper .service-column-label {
+  color: #B33A16;
+}
+
+.section--paper .service-list li {
+  color: var(--ink);
+  border-bottom-color: rgba(12, 11, 10, 0.16);
+  font-size: 18px;
+}
+
+/* Orange-Flaeche mit Ton-in-Ton-Statement wie auf der Studioseite */
 .statement-section {
-  padding: 8rem 0;
+  padding: 9rem 0;
+  background: var(--accent);
 }
 
 .statement-section .container {
@@ -123,48 +189,42 @@ ul, ol { list-style: none; }
   align-items: flex-start;
 }
 
-.statement-section .container::before,
-.statement-section .container::after {
+.statement-section .container::before {
   content: '';
   width: 48px;
-  height: 1px;
-  background: var(--accent);
-  opacity: 0.5;
-}
-
-.statement-section .container::before {
+  height: 3px;
+  background: var(--accent-deep);
   margin-bottom: 48px;
 }
 
-.statement-section .container::after {
-  margin-top: 48px;
-}
-
 .statement-text {
-  font-family: var(--pr-font-body);
-  font-size: 26px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: var(--text-primary);
+  font-family: var(--pr-font-display);
+  font-size: clamp(26px, 3.4vw, 42px);
+  font-weight: 650;
+  font-stretch: 105%;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: var(--accent-deep);
   text-align: left;
-  max-width: 720px;
+  max-width: 900px;
   margin: 0;
 }
 
 .statement-text + .statement-text {
-  margin-top: 20px;
+  margin-top: 28px;
 }
 
 .statement-text a {
-  color: var(--text-primary);
+  color: inherit;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 74, 27, 0.4);
+  border-bottom: 2px solid rgba(12, 11, 10, 0.3);
   padding-bottom: 2px;
   transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .statement-text a:hover {
-  color: var(--accent);
+  color: var(--ink);
+  border-color: var(--ink);
 }
 
 .brand-word {
@@ -401,6 +461,11 @@ ul, ol { list-style: none; }
   color: var(--text-primary);
 }
 
+/* Oranger Schlusspunkt wie im playroom-Wortmarken-Logo */
+.accent-dot {
+  color: var(--accent);
+}
+
 .hero-h2 {
   font-family: var(--pr-font-body);
   font-size: 19px;
@@ -422,21 +487,23 @@ ul, ol { list-style: none; }
   justify-content: center;
 }
 
-/* Primär-Button: hell, mit REC-Punkt im Marken-Orange */
+/* Primär-Button: Marken-Orange, Mono-Versalien wie auf der Studioseite,
+   REC-Punkt als Erkennungszeichen */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: var(--text-primary);
+  background: var(--accent);
   color: var(--ink);
-  padding: 15px 30px;
-  font-family: var(--pr-font-body);
-  font-size: 15px;
+  padding: 17px 30px;
+  font-family: var(--pr-font-mono);
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   border-radius: var(--radius);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   border: none;
   cursor: pointer;
 }
@@ -446,7 +513,7 @@ ul, ol { list-style: none; }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--ink);
   flex: none;
 }
 
@@ -463,19 +530,20 @@ ul, ol { list-style: none; }
   50% { opacity: 0.2; }
 }
 
-/* Sekundär-Button: Textlink mit Pfeil statt Ghost-Box */
+/* Sekundär-Button: Textlink mit Pfeil */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   border: none;
   background: transparent;
   color: var(--text-primary);
-  padding: 15px 6px;
-  font-family: var(--pr-font-body);
-  font-size: 15px;
+  padding: 17px 6px;
+  font-family: var(--pr-font-mono);
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: color 0.25s ease;
 }
@@ -1135,15 +1203,19 @@ ul, ol { list-style: none; }
 .final-cta-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.5) 45%, rgba(10,10,10,0.72) 100%);
+  background: linear-gradient(to bottom, rgba(12,11,10,0.82) 0%, rgba(12,11,10,0.74) 45%, rgba(12,11,10,0.88) 100%);
 }
 
 .final-cta-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 600px;
+  max-width: 900px;
   padding: 0 40px;
+}
+
+.final-cta-subline {
+  margin: 0 auto;
 }
 
 .final-cta-label {
@@ -1151,21 +1223,23 @@ ul, ol { list-style: none; }
   font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(242,245,247,0.85);
+  letter-spacing: 0.18em;
+  color: var(--accent);
   text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   margin-bottom: 24px;
 }
 
+/* Abschluss wie LET'S TALK SOUND. auf der Studioseite */
 .final-cta h2 {
   font-family: var(--pr-font-display);
-  font-size: 56px;
-  font-weight: 600;
-  font-stretch: 108%;
-  letter-spacing: -0.015em;
-  line-height: 1.12;
-  color: var(--text-primary);
-  margin-bottom: 24px;
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 800;
+  font-stretch: 105%;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  color: var(--accent);
+  margin-bottom: 32px;
 }
 
 .final-cta-subline {
@@ -1493,13 +1567,14 @@ ul, ol { list-style: none; }
 /* ══════════════════════════════════════════════
    SIGNET-MOTIV
    ══════════════════════════════════════════════ */
-/* Statement (dunkel) -> Paper-Signet */
+/* Signet als dunkles Ton-in-Ton-Motiv auf der Orange-Flaeche */
 .statement-section { position: relative; overflow: hidden; }
 .statement-section::before {
-  content: ""; position: absolute; top: 50%; right: 4vw; transform: translateY(-50%);
-  width: min(300px, 26vw); aspect-ratio: 62.17 / 84.54;
+  content: ""; position: absolute; top: 50%; right: 2vw; transform: translateY(-50%);
+  width: min(380px, 30vw); aspect-ratio: 62.17 / 84.54;
   background: url('docs/optimized/signet-paper.svg') no-repeat center / contain;
-  opacity: 0.06; z-index: 0; pointer-events: none;
+  filter: brightness(0);
+  opacity: 0.14; z-index: 0; pointer-events: none;
 }
 .statement-section > .container { position: relative; z-index: 1; }
 
@@ -1560,7 +1635,7 @@ ul, ol { list-style: none; }
 
   /* Signet kleiner und dezenter */
   .statement-section::before {
-    width: min(240px, 60vw); opacity: 0.06; right: 4vw;
+    width: min(240px, 60vw); opacity: 0.12; right: 4vw;
   }
 
   .container {
@@ -1804,7 +1879,7 @@ ul, ol { list-style: none; }
   }
 
   .final-cta h2 {
-    font-size: 30px;
+    font-size: 44px;
   }
 
   .final-cta-content {
@@ -1849,7 +1924,7 @@ ul, ol { list-style: none; }
   }
 
   .final-cta h2 {
-    font-size: 30px;
+    font-size: 38px;
   }
 
   .stat-number {
