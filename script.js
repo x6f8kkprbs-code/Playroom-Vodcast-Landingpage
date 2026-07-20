@@ -124,6 +124,88 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ─── Referenzen-Slider ───
+     Ein Case: keine Bedienelemente. Ab zwei Cases: Pfeile + Pfeiltasten,
+     kein Autoplay, reduzierte Bewegung wird respektiert. */
+  const refSlider = document.querySelector('[data-ref-slider]');
+  if (refSlider) {
+    const refTrack = refSlider.querySelector('[data-ref-track]');
+    const refCases = refTrack ? refTrack.querySelectorAll('[data-ref-case]') : [];
+    const refControls = refSlider.querySelector('[data-ref-controls]');
+
+    if (refTrack && refControls && refCases.length > 1) {
+      refControls.hidden = false;
+      const prevBtn = refControls.querySelector('[data-ref-prev]');
+      const nextBtn = refControls.querySelector('[data-ref-next]');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let refIndex = 0;
+
+      function updateRefArrows() {
+        prevBtn.setAttribute('aria-disabled', String(refIndex === 0));
+        nextBtn.setAttribute('aria-disabled', String(refIndex === refCases.length - 1));
+      }
+
+      // Eigene rAF-Animation: scrollTo({behavior:'smooth'}) startet in Chromium
+      // auf Snap-Containern teils gar nicht. Reduced Motion springt direkt.
+      let refAnimFrame = null;
+      let refAnimFallback = null;
+      function scrollTrackTo(target) {
+        if (refAnimFrame) cancelAnimationFrame(refAnimFrame);
+        if (refAnimFallback) clearTimeout(refAnimFallback);
+        if (reducedMotion.matches) { refTrack.scrollLeft = target; return; }
+        const start = refTrack.scrollLeft;
+        const distance = target - start;
+        const duration = 450;
+        const t0 = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - t0) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          refTrack.scrollLeft = start + distance * eased;
+          refAnimFrame = t < 1 ? requestAnimationFrame(tick) : null;
+        }
+        refAnimFrame = requestAnimationFrame(tick);
+        // Falls keine Frames laufen (verdeckter Tab): direkt ans Ziel springen
+        refAnimFallback = setTimeout(() => {
+          if (refAnimFrame) {
+            cancelAnimationFrame(refAnimFrame);
+            refAnimFrame = null;
+            refTrack.scrollLeft = target;
+          }
+        }, duration + 150);
+      }
+
+      function goToRefCase(index) {
+        refIndex = Math.max(0, Math.min(index, refCases.length - 1));
+        scrollTrackTo(refCases[refIndex].offsetLeft);
+        updateRefArrows();
+      }
+
+      prevBtn.addEventListener('click', () => goToRefCase(refIndex - 1));
+      nextBtn.addEventListener('click', () => goToRefCase(refIndex + 1));
+
+      refTrack.setAttribute('tabindex', '0');
+      refTrack.setAttribute('role', 'group');
+      refTrack.setAttribute('aria-label', 'Referenzen, wechseln mit den Pfeiltasten');
+      refTrack.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goToRefCase(refIndex - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goToRefCase(refIndex + 1); }
+      });
+
+      // Index nachziehen, wenn per Touch/Trackpad gewischt wird
+      refTrack.addEventListener('scroll', () => {
+        if (refAnimFrame) return; // eigene Animation läuft, Index stimmt schon
+        const step = refCases[1].offsetLeft - refCases[0].offsetLeft;
+        const nearest = Math.round(refTrack.scrollLeft / step);
+        if (nearest !== refIndex && nearest >= 0 && nearest < refCases.length) {
+          refIndex = nearest;
+          updateRefArrows();
+        }
+      }, { passive: true });
+
+      updateRefArrows();
+    }
+  }
+
   /* ─── Impressum Link ─── */
   const impressumLink = document.querySelector('.impressum-link');
   if (impressumLink) {
