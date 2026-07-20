@@ -1809,13 +1809,19 @@ ul, ol { list-style: none; }
   color: var(--text-primary);
 }
 
+.ref-case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 36px;
+  margin-top: 24px;
+}
+
 .ref-case-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   align-self: flex-start;
   min-height: 44px;
-  margin-top: 24px;
   font-family: var(--pr-font-mono);
   font-size: 13px;
   font-weight: 700;
