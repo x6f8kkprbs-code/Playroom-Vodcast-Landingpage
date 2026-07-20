@@ -6,26 +6,23 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* Designsprache von playroom-studios.com:
-     Marken-Orange, Ton-in-Ton-Kapiteltitel, eine Orange- und eine Paper-Flaeche */
+  /* Designsprache von playroom-studios.com, Tokens 1:1 aus index.html der Studioseite */
   --accent: #FF4A1B;
-  --accent-dim: #40140B;       /* Kapiteltitel Ton-in-Ton auf Dunkel */
-  --accent-deep: #6B1D05;      /* Text auf der Orange-Flaeche */
-  --paper: #F2EDE4;
-  --paper-title: #E4A78F;      /* Kapiteltitel Ton-in-Ton auf Paper */
-  --bg-dark:        #0C0B0A;
-  --bg-raise:       #14120F;
+  --paper: #F2ECE0;            /* Warmes Grau, DER helle Sektionston der Studioseite */
+  --bg-dark:        #0A0A0A;
+  --bg-raise:       #0A0A0A;   /* Studioseite kennt keine Zwischenstufe: alles flaches Ink */
   --text-primary:   #FAF7F2;
-  --text-secondary: #A6A099;
-  --border:         rgba(245,240,235,0.12);
-  --ink:   #0C0B0A;
+  --text-secondary: #a0a0a0;
+  --border:         rgba(245,240,235,0.1);
+  --card-bg:        rgba(245,240,235,0.03);
+  --ink:   #0A0A0A;
   --radius: 4px;
   --pr-font-display: "Archivo","Inter",-apple-system,BlinkMacSystemFont,sans-serif;
   --pr-font-body:    "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --pr-font-mono:    "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --motif-w: min(520px, 48vw);
   --motif-r: -70px;
-  --container:        1200px;
+  --container:        1400px;
   --container-narrow: 760px;
   --section-gap:      120px;
   --section-gap-m:    80px;
@@ -66,48 +63,47 @@ ul, ol { list-style: none; }
 }
 
 /* ─── Shared Typography ─── */
-/* Kicker + kurze Linie: das Label-Device der Studioseite */
+/* Kicker + kurzer oranger Strich: das Sektions-Einstiegs-Device der Studioseite */
 .section-kicker {
   font-family: var(--pr-font-mono);
-  font-size: .75rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: .18em;
   color: var(--accent);
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.6rem;
 }
 
 .section-kicker::after {
   content: '';
   display: block;
-  width: 40px;
-  height: 2px;
+  width: 56px;
+  height: 3px;
   background: var(--accent);
-  margin-top: 12px;
+  margin-top: 1.1rem;
 }
 
-/* Riesiger Ton-in-Ton-Kapiteltitel wie WORK / SERVICES / INSIGHTS
-   auf playroom-studios.com */
+/* Sektionstitel wie OUR WORK / ABOUT auf der Studioseite:
+   volles Orange, Versalien, 900er-Gewicht mit engem Pixel-Tracking (Live-Stand) */
 .section-title {
   font-family: var(--pr-font-display);
-  font-size: clamp(56px, 9vw, 128px);
-  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
   font-stretch: 105%;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: -2px;
   line-height: 0.95;
-  color: var(--accent-dim);
-  margin-bottom: 28px;
-  user-select: none;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
 }
 
+/* Lead-Zeile unter dem Titel, wie "Wir feiern Sound." auf der Studioseite */
 .section-heading {
-  font-family: var(--pr-font-display);
-  font-size: 32px;
-  font-weight: 600;
-  font-stretch: 105%;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  font-family: var(--pr-font-body);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 1.35;
   color: var(--text-primary);
   margin-bottom: 28px;
   max-width: 680px;
@@ -141,7 +137,7 @@ ul, ol { list-style: none; }
 }
 
 .section--paper .section-title {
-  color: var(--paper-title);
+  color: var(--accent);
 }
 
 .section--paper .section-heading {
@@ -150,15 +146,15 @@ ul, ol { list-style: none; }
 
 .section--paper .section-text,
 .section--paper .service-intro {
-  color: rgba(12, 11, 10, 0.72);
+  color: rgba(10, 10, 10, 0.72);
 }
 
 .section--paper .section-kicker {
-  color: #B33A16;
+  color: var(--accent);
 }
 
 .section--paper .section-kicker::after {
-  background: #B33A16;
+  background: var(--accent);
 }
 
 .section--paper .service-column {
@@ -167,18 +163,19 @@ ul, ol { list-style: none; }
 }
 
 .section--paper .service-column-label {
-  color: #B33A16;
+  color: var(--accent);
 }
 
 .section--paper .service-list li {
   color: var(--ink);
-  border-bottom-color: rgba(12, 11, 10, 0.16);
+  border-bottom-color: rgba(10, 10, 10, 0.14);
   font-size: 18px;
 }
 
-/* Orange-Flaeche mit Ton-in-Ton-Statement wie auf der Studioseite */
+/* Orange-Flaeche wie der Manifest-Block der Studioseite:
+   Ink-Rule, grosses Ink-Statement in Display 800, Mono-Caps-Body */
 .statement-section {
-  padding: 9rem 0;
+  padding: clamp(6rem, 13vh, 10rem) 0;
   background: var(--accent);
 }
 
@@ -191,40 +188,48 @@ ul, ol { list-style: none; }
 
 .statement-section .container::before {
   content: '';
-  width: 48px;
-  height: 3px;
-  background: var(--accent-deep);
-  margin-bottom: 48px;
+  width: 64px;
+  height: 4px;
+  background: var(--ink);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .statement-text {
   font-family: var(--pr-font-display);
-  font-size: clamp(26px, 3.4vw, 42px);
-  font-weight: 650;
+  font-size: clamp(2.1rem, 5.4vw, 4.6rem);
+  font-weight: 800;
   font-stretch: 105%;
-  letter-spacing: -0.015em;
-  line-height: 1.25;
-  color: var(--accent-deep);
+  letter-spacing: -0.025em;
+  line-height: 1.0;
+  color: var(--ink);
   text-align: left;
-  max-width: 900px;
+  max-width: 1180px;
   margin: 0;
 }
 
 .statement-text + .statement-text {
-  margin-top: 28px;
+  font-family: var(--pr-font-mono);
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+  font-weight: 500;
+  font-stretch: normal;
+  letter-spacing: 0.08em;
+  line-height: 2.05;
+  text-transform: uppercase;
+  max-width: 720px;
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
 }
 
 .statement-text a {
   color: inherit;
   text-decoration: none;
-  border-bottom: 2px solid rgba(12, 11, 10, 0.3);
+  border-bottom: 2px solid rgba(10, 10, 10, 0.3);
   padding-bottom: 2px;
   transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .statement-text a:hover {
-  color: var(--ink);
-  border-color: var(--ink);
+  color: var(--text-primary);
+  border-color: var(--text-primary);
 }
 
 .brand-word {
@@ -277,11 +282,11 @@ ul, ol { list-style: none; }
 }
 
 .nav.scrolled {
-  background: rgba(10, 9, 7, 0.92);
+  background: rgba(10, 10, 10, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 14px 40px;
-  border-bottom: 1px solid rgba(245, 240, 232, 0.10);
+  border-bottom: 1px solid rgba(245, 240, 235, 0.10);
 }
 
 /* Prevent white line from border rendering */
@@ -307,9 +312,9 @@ ul, ol { list-style: none; }
 }
 
 .nav-links a {
-  font-family: var(--pr-font-body);
+  font-family: var(--pr-font-mono);
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-secondary);
@@ -428,7 +433,7 @@ ul, ol { list-style: none; }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(12,11,10,0.42) 0%, rgba(12,11,10,0.26) 45%, rgba(12,11,10,0.08) 100%);
+  background: radial-gradient(ellipse at center, rgba(10,10,10,0.42) 0%, rgba(10,10,10,0.26) 45%, rgba(10,10,10,0.08) 100%);
   z-index: 1;
 }
 
@@ -453,11 +458,11 @@ ul, ol { list-style: none; }
 
 .hero h1 {
   font-family: var(--pr-font-display);
-  font-size: clamp(2.5rem, 5.2vw, 4.4rem);
-  font-weight: 650;
-  font-stretch: 108%;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.4rem, 5.7vw, 4.8rem);
+  font-weight: 900;
+  font-stretch: 105%;
+  line-height: 0.95;
+  letter-spacing: -3px;
   color: var(--text-primary);
 }
 
@@ -496,13 +501,13 @@ ul, ol { list-style: none; }
   gap: 10px;
   background: var(--accent);
   color: var(--ink);
-  padding: 17px 30px;
+  padding: 1.1rem 2.4rem;
   font-family: var(--pr-font-mono);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border-radius: var(--radius);
+  border-radius: 0;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   border: none;
   cursor: pointer;
@@ -538,9 +543,9 @@ ul, ol { list-style: none; }
   border: none;
   background: transparent;
   color: var(--text-primary);
-  padding: 17px 6px;
+  padding: 1.1rem 6px;
   font-family: var(--pr-font-mono);
-  font-size: 13px;
+  font-size: 0.85rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -906,7 +911,8 @@ ul, ol { list-style: none; }
 .process-step {
   position: relative;
   padding: 28px 24px;
-  background: var(--bg-dark);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   counter-increment: step;
   display: grid;
@@ -1203,7 +1209,7 @@ ul, ol { list-style: none; }
 .final-cta-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(12,11,10,0.82) 0%, rgba(12,11,10,0.74) 45%, rgba(12,11,10,0.88) 100%);
+  background: linear-gradient(to bottom, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.74) 45%, rgba(10,10,10,0.88) 100%);
 }
 
 .final-cta-content {
@@ -1232,11 +1238,11 @@ ul, ol { list-style: none; }
 /* Abschluss wie LET'S TALK SOUND. auf der Studioseite */
 .final-cta h2 {
   font-family: var(--pr-font-display);
-  font-size: clamp(48px, 7vw, 96px);
-  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
   font-stretch: 105%;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: -2px;
   line-height: 0.98;
   color: var(--accent);
   margin-bottom: 32px;
@@ -1247,7 +1253,7 @@ ul, ol { list-style: none; }
   font-size: 17px;
   font-weight: 300;
   line-height: 1.7;
-  color: rgba(245, 240, 232, 0.8);
+  color: rgba(245, 240, 235, 0.8);
   max-width: 500px;
   margin: 0 auto;
 }
@@ -1260,12 +1266,12 @@ ul, ol { list-style: none; }
   margin-top: 48px;
   font-family: var(--pr-font-body);
   font-size: 14px;
-  color: rgba(245, 240, 232, 0.7);
+  color: rgba(245, 240, 235, 0.7);
   line-height: 1.8;
 }
 
 .final-cta-contact a {
-  color: rgba(245, 240, 232, 0.7);
+  color: rgba(245, 240, 235, 0.7);
   transition: color 0.3s ease;
 }
 
@@ -1305,7 +1311,7 @@ ul, ol { list-style: none; }
 
 /* Scrim UND Blur nur im offenen Zustand -> kein liegender dunkler Layer wenn geschlossen */
 .contact-modal.open .contact-modal-overlay {
-  background: rgba(10, 9, 7, 0.85);
+  background: rgba(10, 10, 10, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -1570,11 +1576,11 @@ ul, ol { list-style: none; }
 /* Signet als dunkles Ton-in-Ton-Motiv auf der Orange-Flaeche */
 .statement-section { position: relative; overflow: hidden; }
 .statement-section::before {
-  content: ""; position: absolute; top: 50%; right: 2vw; transform: translateY(-50%);
-  width: min(380px, 30vw); aspect-ratio: 62.17 / 84.54;
+  content: ""; position: absolute; top: 50%; right: -60px; transform: translateY(-50%);
+  width: min(440px, 34vw); aspect-ratio: 62.17 / 84.54;
   background: url('docs/optimized/signet-paper.svg') no-repeat center / contain;
   filter: brightness(0);
-  opacity: 0.14; z-index: 0; pointer-events: none;
+  opacity: 0.10; z-index: 0; pointer-events: none;
 }
 .statement-section > .container { position: relative; z-index: 1; }
 
@@ -1582,10 +1588,6 @@ ul, ol { list-style: none; }
    RESPONSIVE
    ══════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .section-heading {
-    font-size: 42px;
-  }
-
   .diff-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1671,13 +1673,13 @@ ul, ol { list-style: none; }
     background: var(--bg-dark);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+    border-bottom: 1px solid rgba(245, 240, 235, 0.08);
   }
 
   .nav.scrolled {
     padding: 16px 24px;
     background: var(--bg-dark);
-    border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+    border-bottom: 1px solid rgba(245, 240, 235, 0.08);
   }
 
   .nav-links {
@@ -1699,10 +1701,11 @@ ul, ol { list-style: none; }
   }
 
   .mobile-menu-overlay a {
-    font-size: 28px;
-    font-family: var(--pr-font-display);
-    font-weight: 400;
-    letter-spacing: 0.04em;
+    font-size: 24px;
+    font-family: var(--pr-font-mono);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--text-primary);
     text-decoration: none;
   }
@@ -1725,8 +1728,9 @@ ul, ol { list-style: none; }
   }
 
   .hero h1 {
-    font-size: 32px;
-    line-height: 1.15;
+    font-size: 2.8rem;
+    letter-spacing: -1px;
+    line-height: 1.02;
   }
 
   .hero-content {
@@ -1754,7 +1758,6 @@ ul, ol { list-style: none; }
   }
 
   .statement-text {
-    font-size: 22px;
     text-align: left;
     padding: 0;
   }
@@ -1862,7 +1865,6 @@ ul, ol { list-style: none; }
 
   /* Section Heading */
   .section-heading {
-    font-size: 30px;
     margin-bottom: 24px;
   }
 
@@ -1876,10 +1878,6 @@ ul, ol { list-style: none; }
   /* Final CTA */
   .final-cta {
     min-height: 60vh;
-  }
-
-  .final-cta h2 {
-    font-size: 44px;
   }
 
   .final-cta-content {
@@ -1912,11 +1910,13 @@ ul, ol { list-style: none; }
 
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 28px;
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
   }
 
-  .section-heading {
-    font-size: 27px;
+  .section-title {
+    font-size: 2rem;
+    letter-spacing: -1px;
   }
 
   .positioning-quote {
@@ -1924,11 +1924,18 @@ ul, ol { list-style: none; }
   }
 
   .final-cta h2 {
-    font-size: 38px;
+    font-size: 2rem;
+    letter-spacing: -1px;
   }
 
   .stat-number {
     font-size: 36px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 1.9rem;
   }
 }
 
