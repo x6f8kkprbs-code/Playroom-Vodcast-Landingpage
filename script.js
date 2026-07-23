@@ -206,6 +206,116 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* ─── Behind the Scenes ───
+     Pro Case liegt ein JSON-Array in <script data-ref-bts> (behindTheScenes).
+     Mit mindestens einem gueltigen Bild wird der zweite CTA zum
+     "Behind the Scenes"-Button und oeffnet die Lightbox. Ohne Bilder bleibt
+     der "Projekt anfragen"-Link unveraendert — kein leerer Galerie-Zustand. */
+  let btsLightbox = null;
+
+  function openBtsLightbox(items, opener, caseTitle) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let btsIndex = 0;
+
+    if (!btsLightbox) {
+      btsLightbox = document.createElement('div');
+      btsLightbox.className = 'ref-lightbox';
+      btsLightbox.setAttribute('role', 'dialog');
+      btsLightbox.setAttribute('aria-modal', 'true');
+      btsLightbox.innerHTML =
+        '<div class="ref-lightbox-scrim" data-lb-close></div>' +
+        '<figure class="ref-lightbox-stage">' +
+        '  <img class="ref-lightbox-img" alt="">' +
+        '  <figcaption class="ref-lightbox-caption"><span data-lb-counter></span><span data-lb-alt></span></figcaption>' +
+        '</figure>' +
+        '<button type="button" class="ref-lightbox-close" data-lb-close aria-label="Galerie schließen">✕</button>' +
+        '<button type="button" class="ref-lightbox-nav ref-lightbox-nav--prev" data-lb-prev aria-label="Vorheriges Bild">←</button>' +
+        '<button type="button" class="ref-lightbox-nav ref-lightbox-nav--next" data-lb-next aria-label="Nächstes Bild">→</button>';
+      document.body.appendChild(btsLightbox);
+    }
+
+    const lbImg = btsLightbox.querySelector('.ref-lightbox-img');
+    const lbCounter = btsLightbox.querySelector('[data-lb-counter]');
+    const lbAlt = btsLightbox.querySelector('[data-lb-alt]');
+    const lbPrev = btsLightbox.querySelector('[data-lb-prev]');
+    const lbNext = btsLightbox.querySelector('[data-lb-next]');
+    const lbClose = btsLightbox.querySelector('.ref-lightbox-close');
+    const multi = items.length > 1;
+
+    btsLightbox.setAttribute('aria-label', 'Behind the Scenes' + (caseTitle ? ': ' + caseTitle : '') + ' – Bildergalerie');
+    lbPrev.hidden = !multi;
+    lbNext.hidden = !multi;
+
+    function show(index) {
+      btsIndex = (index + items.length) % items.length;
+      lbImg.src = items[btsIndex].src;
+      lbImg.alt = items[btsIndex].alt || '';
+      lbAlt.textContent = items[btsIndex].alt || '';
+      lbCounter.textContent = multi ? (btsIndex + 1) + ' / ' + items.length : '';
+    }
+
+    function onKeydown(e) {
+      if (e.key === 'Escape') { e.preventDefault(); close(); }
+      if (multi && e.key === 'ArrowLeft') { e.preventDefault(); show(btsIndex - 1); }
+      if (multi && e.key === 'ArrowRight') { e.preventDefault(); show(btsIndex + 1); }
+      if (e.key === 'Tab') {
+        // Fokus im Dialog halten (drei Bedienelemente)
+        const focusables = [lbClose, lbPrev, lbNext].filter(el => !el.hidden);
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
+    function close() {
+      btsLightbox.classList.remove('open');
+      document.removeEventListener('keydown', onKeydown);
+      document.body.style.overflow = '';
+      const done = () => { btsLightbox.hidden = true; };
+      if (reducedMotion.matches) done(); else setTimeout(done, 250);
+      if (opener && document.contains(opener)) opener.focus();
+    }
+
+    btsLightbox.querySelectorAll('[data-lb-close]').forEach(el => { el.onclick = close; });
+    lbPrev.onclick = () => show(btsIndex - 1);
+    lbNext.onclick = () => show(btsIndex + 1);
+    document.addEventListener('keydown', onKeydown);
+
+    show(0);
+    btsLightbox.hidden = false;
+    void btsLightbox.offsetWidth; // Reflow, damit der Fade laeuft
+    btsLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  document.querySelectorAll('[data-ref-case]').forEach(caseEl => {
+    const dataEl = caseEl.querySelector('script[data-ref-bts]');
+    let behindTheScenes = [];
+    if (dataEl) {
+      try { behindTheScenes = JSON.parse(dataEl.textContent); } catch (err) { behindTheScenes = []; }
+    }
+    behindTheScenes = Array.isArray(behindTheScenes)
+      ? behindTheScenes.filter(it => it && typeof it.src === 'string' && it.src.trim() !== '')
+      : [];
+    if (behindTheScenes.length === 0) return; // Fallback-CTA "Projekt anfragen" bleibt
+
+    const fallbackCta = caseEl.querySelector('.ref-case-cta');
+    if (!fallbackCta) return;
+    const caseTitle = caseEl.querySelector('.ref-case-title');
+    const titleText = caseTitle ? caseTitle.textContent.trim() : '';
+
+    const btsBtn = document.createElement('button');
+    btsBtn.type = 'button';
+    btsBtn.className = 'ref-case-link ref-case-cta';
+    btsBtn.setAttribute('aria-haspopup', 'dialog');
+    btsBtn.setAttribute('aria-label', 'Behind the Scenes' + (titleText ? ' zu ' + titleText : '') + ' ansehen');
+    btsBtn.innerHTML = 'Behind the Scenes <span class="ref-case-link-arrow" aria-hidden="true">→</span>';
+    btsBtn.addEventListener('click', () => openBtsLightbox(behindTheScenes, btsBtn, titleText));
+    fallbackCta.replaceWith(btsBtn);
+  });
+
   /* ─── Impressum Link ─── */
   const impressumLink = document.querySelector('.impressum-link');
   if (impressumLink) {
@@ -369,4 +479,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('mouseleave', function () { cursor.classList.remove('is-active'); });
   document.addEventListener('mouseenter', function () { if (active) cursor.classList.add('is-active'); });
+})();
+
+// --- GA4 Conversion Events ---
+// Delegierte Listener auf document für den Anfrage-Funnel.
+// Measurement-ID G-3JSRS7L4B8 ist in index.html konfiguriert (gtag.js).
+(function () {
+  function track(eventName, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, params || {});
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var target = e.target;
+    if (!target || !target.closest) return;
+
+    if (target.closest('.open-contact-form')) {
+      track('anfrage_bot_open', { event_category: 'conversion' });
+    } else if (target.closest('a[href^="tel:"]')) {
+      track('telefon_click', { event_category: 'conversion' });
+    } else if (target.closest('a[href*="youtube.com"]')) {
+      track('referenz_youtube_click', { event_category: 'outbound' });
+    }
+  });
+
+  // Klassisches Kontaktformular im #contactModal (formsubmit.co, id="contactForm").
+  document.addEventListener('submit', function (e) {
+    if (e.target && e.target.id === 'contactForm') {
+      track('kontakt_formular_submit', { event_category: 'conversion' });
+    }
+  });
 })();

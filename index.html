@@ -38,7 +38,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Oswald:wght@400..600&display=swap" rel="stylesheet">
 
 <!-- Styles -->
-<link rel="stylesheet" href="style.css?v=49">
+<link rel="stylesheet" href="style.css?v=50">
 
 <!-- Anfrage-Bot Styles -->
 <link rel="stylesheet" href="https://bot.podcast-frankfurt.net/widget.css">
@@ -408,9 +408,15 @@ window.scrollTo(0, 0);
               <li>Audio-Postproduktion</li>
             </ul>
             <div class="ref-case-result"><span class="ref-dot ref-dot--small" aria-hidden="true"></span>Auslieferung: <strong>innerhalb von 24 Stunden</strong></div>
+            <!-- Behind-the-Scenes-Bilder: Eintraege ergaenzen ({"src": "...", "alt": "..."}),
+                 dann wird der zweite CTA automatisch zu "Behind the Scenes" (script.js).
+                 Leeres Array = CTA bleibt "Projekt anfragen". -->
+            <script type="application/json" data-ref-bts>
+              []
+            </script>
             <div class="ref-case-links">
               <a class="ref-case-link" href="https://www.youtube.com/watch?v=meljXLbyE44" target="_blank" rel="noopener noreferrer">Folge ansehen <span class="ref-case-link-arrow" aria-hidden="true">&#8599;</span><span class="visually-hidden">(YouTube, öffnet in neuem Tab)</span></a>
-              <a class="ref-case-link open-contact-form" href="#">Video-Podcast anfragen <span class="ref-case-link-arrow" aria-hidden="true">&#8594;</span></a>
+              <a class="ref-case-link ref-case-cta open-contact-form" href="#">Projekt anfragen <span class="ref-case-link-arrow" aria-hidden="true">&#8594;</span></a>
             </div>
             <div class="ref-case-footer">Playroom Studios &middot; Video-Podcast-Studio Frankfurt</div>
           </div>
@@ -818,6 +824,6 @@ window.scrollTo(0, 0);
 <script src="https://bot.podcast-frankfurt.net/widget.js"></script>
 
 <!-- Script -->
-<script src="script.js?v=12"></script>
+<script src="script.js?v=14"></script>
 </body>
 </html>
