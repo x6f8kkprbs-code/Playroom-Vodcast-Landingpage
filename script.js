@@ -505,9 +505,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Klassisches Kontaktformular im #contactModal (formsubmit.co, id="contactForm").
+  // Das Bot-Widget feuert dasselbe Event mit lead_source 'bot'. Beide Quellen
+  // sind in GA4 ueber lead_source trennbar.
   document.addEventListener('submit', function (e) {
     if (e.target && e.target.id === 'contactForm') {
-      track('kontakt_formular_submit', { event_category: 'conversion' });
+      track('kontakt_formular_submit', { event_category: 'conversion', lead_source: 'formular' });
     }
   });
 })();
