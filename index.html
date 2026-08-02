@@ -38,7 +38,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Oswald:wght@400..600&display=swap" rel="stylesheet">
 
 <!-- Styles -->
-<link rel="stylesheet" href="style.css?v=51">
+<link rel="stylesheet" href="style.css?v=55">
 
 <!-- Anfrage-Bot Styles -->
 <link rel="stylesheet" href="https://bot.podcast-frankfurt.net/widget.css">
@@ -225,8 +225,14 @@ window.scrollTo(0, 0);
 <section class="hero" id="start">
   <div class="hero-bg">
     <picture>
-      <source media="(max-width: 768px)" srcset="docs/optimized/Vodcast01-17-hero-mobile.webp" width="1080" height="1350">
+      <source media="(max-width: 768px)" srcset="docs/optimized/hero-mobile-1.webp" width="1080" height="1936">
       <img src="docs/optimized/hero-desktop-129.webp" srcset="docs/optimized/hero-desktop-129.webp 1920w" sizes="100vw" alt="Videopodcast-Studio von Playroom Studios Frankfurt mit professionellem Lichtsetup" width="1920" height="1080" fetchpriority="high">
+    </picture>
+    <!-- Zweite Ebene der Mobile-Blende. Das media-Gate der <source> greift nur bis
+         768px, auf Desktop bleibt der 1x1-Data-URI und es entsteht kein Request. -->
+    <picture class="hero-slide hero-slide-2">
+      <source media="(max-width: 768px)" srcset="docs/optimized/hero-mobile-2.webp" width="1080" height="1936">
+      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="1080" height="1936" loading="eager" decoding="async" alt="" aria-hidden="true">
     </picture>
   </div>
   <div class="hero-overlay"></div>
@@ -306,6 +312,10 @@ window.scrollTo(0, 0);
     </div>
     <div class="studio-images reveal-element">
       <figure class="studio-image-item">
+        <img src="docs/optimized/corporate-setup-blau.webp" alt="Corporate-Setup im Playroom Studio: zwei Sessel, runder Tisch, blaue R&uuml;ckwand" width="1600" height="894" loading="lazy" decoding="async">
+        <figcaption>Corporate-Setup</figcaption>
+      </figure>
+      <figure class="studio-image-item">
         <img src="docs/optimized/studio-lounge-neu.webp" alt="Lounge-Setup f&uuml;r Podcast-Aufnahmen mit Sofas und warmem Licht bei Playroom Studios" width="1600" height="900" loading="lazy" decoding="async">
         <figcaption>Lounge-Setup</figcaption>
       </figure>
@@ -317,14 +327,14 @@ window.scrollTo(0, 0);
         <img src="docs/optimized/studio-sessel-172.webp" alt="Sessel-Setup mit zwei Sesseln und pers&ouml;nlicher Atmosph&auml;re bei Playroom Studios Frankfurt" width="1600" height="900" loading="lazy" decoding="async">
         <figcaption>Sessel-Setup</figcaption>
       </figure>
-      <figure class="studio-image-item">
-        <img src="docs/optimized/studio-stehpult-026.webp" alt="Stehpult-Setup f&uuml;r Vortr&auml;ge und Pr&auml;sentationen vor der Kamera bei Playroom Studios" width="1600" height="1067" loading="lazy" decoding="async">
-        <figcaption>Stehpult-Setup</figcaption>
-      </figure>
     </div>
     <div class="sub-headline reveal-element">Vier Setups, ein Studio</div>
     <p class="section-text studio-setups-intro reveal-element">Je nach Format, Gespr&auml;chssituation und Zielgruppe richten wir das Studio passend f&uuml;r eure Produktion ein. Vom lockeren Gespr&auml;ch bis zur Pr&auml;sentation vor der Kamera.</p>
     <div class="studio-setups reveal-element">
+      <div class="setup-item">
+        <div class="setup-name">Corporate-Setup</div>
+        <div class="setup-desc">Zwei Sessel, runder Tisch, ruhige Farbfl&auml;che im Hintergrund. Das klassische Interview-Setting f&uuml;r Gespr&auml;che auf Augenh&ouml;he.</div>
+      </div>
       <div class="setup-item">
         <div class="setup-name">Lounge-Setup</div>
         <div class="setup-desc">Bequeme Sofas, warmes Licht und eine offene Gespr&auml;chsatmosph&auml;re. F&uuml;r Storytelling-Formate, CEO-Talks und Gespr&auml;che, die bewusst weniger formal gef&uuml;hrt werden.</div>
@@ -336,10 +346,6 @@ window.scrollTo(0, 0);
       <div class="setup-item">
         <div class="setup-name">Sessel-Setup</div>
         <div class="setup-desc">Zwei Sessel, konzentrierte Bildsprache und eine pers&ouml;nliche Atmosph&auml;re. Ideal f&uuml;r Interviews, Deep Dives und Gespr&auml;che, bei denen die Menschen im Mittelpunkt stehen.</div>
-      </div>
-      <div class="setup-item">
-        <div class="setup-name">Stehpult-Setup</div>
-        <div class="setup-desc">F&uuml;r Vortr&auml;ge, Anmoderationen, Pr&auml;sentationen und Statements direkt in die Kamera. Klar, fokussiert und professionell inszeniert.</div>
       </div>
     </div>
     <div class="studio-setups-note reveal-element">

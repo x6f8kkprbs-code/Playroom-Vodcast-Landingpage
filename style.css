@@ -449,6 +449,22 @@ ul, ol { list-style: none; }
   opacity: 1;
 }
 
+/* Mobile-Slideshow: das <picture> in .hero-bg ist die Grundebene (Slide 1),
+   .hero-slide-2 blendet darueber. Auf Desktop bleibt die Ebene aus, dort laeuft
+   .hero-video. Dass kein Mobile-Bild geladen wird, regelt nicht dieses display,
+   sondern das media-Gate der <source> im Markup. */
+.hero-slide {
+  display: none;
+}
+
+@keyframes heroCrossfade {
+  0%    { opacity: 0; }
+  37.5% { opacity: 0; }
+  50%   { opacity: 1; }
+  87.5% { opacity: 1; }
+  100%  { opacity: 0; }
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -2269,8 +2285,36 @@ ul, ol { list-style: none; }
     background: linear-gradient(rgba(10,10,10,0.22), rgba(10,10,10,0.40));
   }
 
+  /* Gleiche Zusatzabdunklung wie beim Desktop-Video, gleiche Variable.
+     .has-video wird auf Mobile nie gesetzt, deshalb hier ohne Klasse. */
+  .hero-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, var(--hero-video-dim));
+    pointer-events: none;
+  }
+
   .hero-bg img {
     object-position: center center;
+  }
+
+  /* Zweite Ebene liegt deckungsgleich ueber der Grundebene. Die Blende laeuft auf
+     dem <picture>, damit nur eine Ebene animiert wird. */
+  .hero-bg .hero-slide {
+    display: block;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    animation: heroCrossfade 8s infinite;
+  }
+
+  /* Doppelte Klasse, damit die Regel .hero-bg img (0,1,1) sicher geschlagen wird. */
+  .hero-bg .hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .hero h1 {
@@ -2495,6 +2539,13 @@ ul, ol { list-style: none; }
 
   .scroll-indicator {
     animation: none;
+  }
+
+  /* Hero-Slideshow steht still, es bleibt das erste Standbild sichtbar.
+     Selektor bewusst zweiklassig, sonst schlaegt .hero-bg .hero-slide-2 zurueck. */
+  .hero-bg .hero-slide-2 {
+    animation: none;
+    opacity: 0;
   }
 
   .btn-primary:hover::before {
