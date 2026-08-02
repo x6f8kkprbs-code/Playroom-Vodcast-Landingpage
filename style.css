@@ -22,6 +22,8 @@
   --pr-font-mono:    "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --motif-w: min(520px, 48vw);
   --motif-r: -70px;
+  /* Zusatz-Abdunklung ueber dem Hero-Video, damit der Titel lesbar bleibt */
+  --hero-video-dim: 0.35;
   --container:        1400px;
   --container-narrow: 760px;
   --section-gap:      120px;
@@ -429,12 +431,40 @@ ul, ol { list-style: none; }
   object-fit: cover;
 }
 
+/* Hintergrundvideo, nur auf Desktop per script.js eingehaengt.
+   Liegt im .hero-bg ueber dem Foto (das als Fallback bestehen bleibt)
+   und unter .hero-overlay (z-index 1) sowie .hero-content (z-index 2). */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 600ms ease;
+  pointer-events: none;
+}
+
+.hero-video.is-visible {
+  opacity: 1;
+}
 
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at center, rgba(10,10,10,0.42) 0%, rgba(10,10,10,0.26) 45%, rgba(10,10,10,0.08) 100%);
   z-index: 1;
+}
+
+/* Zusaetzliche Abdunklung, sobald das Hero-Video laeuft. Greift nur ueber
+   .has-video (setzt script.js gemeinsam mit .is-visible). Staerke an genau
+   einer Stelle regelbar: --hero-video-dim (siehe :root). */
+.hero.has-video .hero-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--hero-video-dim));
+  pointer-events: none;
 }
 
 .hero-content {
@@ -1962,6 +1992,141 @@ ul, ol { list-style: none; }
 
   .ref-controls {
     justify-content: center;
+  }
+}
+
+/* ─── Behind-the-Scenes-Lightbox ───
+   Wird von script.js nur erzeugt, wenn ein Case BTS-Bilder hat. */
+.ref-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.ref-lightbox[hidden] {
+  display: none;
+}
+
+.ref-lightbox.open {
+  opacity: 1;
+}
+
+.ref-lightbox-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.94);
+  cursor: pointer;
+}
+
+.ref-lightbox-stage {
+  position: relative;
+  z-index: 1;
+  max-width: min(1200px, calc(100vw - 48px));
+  margin: 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ref-lightbox-img {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.ref-lightbox-caption {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 16px;
+  font-family: var(--pr-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+}
+
+.ref-lightbox-caption [data-lb-counter] {
+  color: var(--accent);
+}
+
+.ref-lightbox-close,
+.ref-lightbox-nav {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 240, 235, 0.25);
+  background: rgba(10, 10, 10, 0.6);
+  color: var(--text-primary);
+  font-size: 18px;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.ref-lightbox-close:hover,
+.ref-lightbox-nav:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.ref-lightbox-close:focus-visible,
+.ref-lightbox-nav:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.ref-lightbox-close {
+  top: 24px;
+  right: 24px;
+}
+
+.ref-lightbox-nav--prev {
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ref-lightbox-nav--next {
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .ref-lightbox-stage {
+    max-width: calc(100vw - 24px);
+  }
+
+  .ref-lightbox-img {
+    max-height: 64vh;
+  }
+
+  .ref-lightbox-close,
+  .ref-lightbox-nav {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ref-lightbox-nav--prev { left: 12px; }
+  .ref-lightbox-nav--next { right: 12px; }
+  .ref-lightbox-close { top: 12px; right: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ref-lightbox {
+    transition: none;
   }
 }
 

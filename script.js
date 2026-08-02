@@ -513,3 +513,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 })();
+
+// --- Hero Background Video ---
+// Das <video> wird bewusst erst hier per JS erzeugt und nicht ins Markup
+// geschrieben: sonst wuerde Mobile die Datei ebenfalls anfordern. Auf Mobile
+// und bei reduzierter Bewegung bleibt das Foto aus .hero-bg unveraendert stehen.
+(function () {
+  // 769px = Desktop-Grenze der Seite (Mobile-Layout und <source> greifen bis 768px).
+  var isDesktop = window.matchMedia('(min-width: 769px)').matches;
+  var motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+  if (!isDesktop || !motionOk) return;
+
+  var hero = document.querySelector('.hero');
+  var heroBg = document.querySelector('.hero-bg');
+  if (!hero || !heroBg) return;
+
+  var video = document.createElement('video');
+  video.className = 'hero-video';
+  video.autoplay = true;
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = 'metadata';
+  video.setAttribute('playsinline', '');
+  video.setAttribute('aria-hidden', 'true');
+  video.src = 'docs/optimized/hero-loop.mp4';
+
+  function removeVideo() {
+    hero.classList.remove('has-video');
+    if (video.parentNode) video.parentNode.removeChild(video);
+  }
+
+  // Erst einblenden, wenn wirklich Bilder da sind — sonst blitzt ein schwarzer Rahmen.
+  video.addEventListener('canplay', function () {
+    video.classList.add('is-visible');
+    hero.classList.add('has-video');
+  }, { once: true });
+
+  video.addEventListener('error', removeVideo, { once: true });
+
+  heroBg.appendChild(video);
+
+  // play() liefert in modernen Browsern ein Promise, das etwa bei strenger
+  // Autoplay-Policy rejected. Dann Video wieder entfernen, Foto bleibt sichtbar.
+  var playPromise = video.play();
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch(removeVideo);
+  }
+})();
