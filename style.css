@@ -420,7 +420,14 @@ ul, ol { list-style: none; }
 
 .hero-bg {
   position: absolute;
-  inset: 0;
+  /* 2px Overscan statt inset:0 — die Parallax-Transform (translate3d in
+     script.js) promotet .hero-bg auf eine eigene Compositing-Layer, die bei
+     manchen Zoom-/DPR-Kombinationen einen Sub-Pixel-Spalt unter der fixed
+     .nav zeigt. .hero hat overflow:hidden, schneidet den Overscan sauber ab. */
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
   z-index: 0;
   will-change: transform;
 }
