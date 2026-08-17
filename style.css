@@ -1748,6 +1748,41 @@ ul, ol { list-style: none; }
   height: auto;
 }
 
+.ref-case-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ref-case-play-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 240, 235, 0.4);
+  background: rgba(10, 10, 10, 0.55);
+  color: var(--text-primary);
+  font-size: 22px;
+  padding-left: 4px; /* optisch zentrieren, Dreieck ist links-lastig */
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.ref-case-play:hover .ref-case-play-icon,
+.ref-case-play:focus-visible .ref-case-play-icon {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.06);
+}
+
+.ref-case-play:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+
 .ref-case-badge {
   position: absolute;
   top: 28px;
@@ -2138,6 +2173,27 @@ ul, ol { list-style: none; }
   .ref-lightbox-nav--prev { left: 12px; }
   .ref-lightbox-nav--next { right: 12px; }
   .ref-lightbox-close { top: 12px; right: 12px; }
+}
+
+.ref-video-lightbox-stage {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, calc(100vw - 48px));
+  aspect-ratio: 16 / 9;
+}
+
+.ref-video-lightbox-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  background: #000;
+}
+
+@media (max-width: 768px) {
+  .ref-video-lightbox-stage {
+    width: calc(100vw - 24px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
