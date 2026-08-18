@@ -280,7 +280,8 @@ ul, ol { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background 0.4s ease, padding 0.4s ease;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease, border-bottom-color 0.4s ease;
 }
 
 .nav.scrolled {
@@ -288,11 +289,13 @@ ul, ol { list-style: none; }
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 14px 40px;
-  border-bottom: 1px solid rgba(245, 240, 235, 0.10);
+  border-bottom-color: rgba(245, 240, 235, 0.10);
 }
 
-/* Prevent white line from border rendering */
-.nav::after {
+/* Prevent white line from border rendering — nur im gescrollten Zustand noetig,
+   sonst zeichnet das auch ueber dem transparenten Hero-Nav eine dauerhaft
+   sichtbare dunkle Linie. */
+.nav.scrolled::after {
   content: '';
   position: absolute;
   bottom: -1px;
@@ -420,14 +423,7 @@ ul, ol { list-style: none; }
 
 .hero-bg {
   position: absolute;
-  /* 2px Overscan statt inset:0 — die Parallax-Transform (translate3d in
-     script.js) promotet .hero-bg auf eine eigene Compositing-Layer, die bei
-     manchen Zoom-/DPR-Kombinationen einen Sub-Pixel-Spalt unter der fixed
-     .nav zeigt. .hero hat overflow:hidden, schneidet den Overscan sauber ab. */
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
+  inset: 0;
   z-index: 0;
   will-change: transform;
 }
