@@ -39,11 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Nav-Abdunklung an die Scroll-Position gekoppelt statt ueber einen festen
   // Schwellwert + CSS-Transition — dadurch immer exakt gleichmaessig, egal
   // wie schnell gescrollt wird (kein Nachhinken/Ruckeln der Transition).
-  const NAV_FADE_DISTANCE = 240;
+  // Grosse Distanz + Smoothstep-Easing: faengt sehr sanft an, statt gleich
+  // linear loszulegen — fuehlt sich dadurch langsam und weich an, nicht wie
+  // ein Schalter.
+  const NAV_FADE_DISTANCE = 600;
+
+  function smoothstep(t) {
+    return t * t * (3 - 2 * t);
+  }
 
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    const navProgress = Math.min(1, scrollY / NAV_FADE_DISTANCE);
+    const navProgress = smoothstep(Math.min(1, scrollY / NAV_FADE_DISTANCE));
     nav.style.setProperty('--nav-progress', navProgress);
     nav.classList.toggle('scrolled', navProgress > 0);
 
