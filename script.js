@@ -36,13 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSection = document.querySelector('.hero');
   const heroHeight = heroSection ? heroSection.offsetHeight : 0;
 
+  // Nav-Abdunklung an die Scroll-Position gekoppelt statt ueber einen festen
+  // Schwellwert + CSS-Transition — dadurch immer exakt gleichmaessig, egal
+  // wie schnell gescrollt wird (kein Nachhinken/Ruckeln der Transition).
+  const NAV_FADE_DISTANCE = 240;
+
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    if (scrollY > 80) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
+    const navProgress = Math.min(1, scrollY / NAV_FADE_DISTANCE);
+    nav.style.setProperty('--nav-progress', navProgress);
+    nav.classList.toggle('scrolled', navProgress > 0);
 
     // Parallax — only while hero is visible
     if (scrollY < heroHeight) {

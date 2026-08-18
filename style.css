@@ -276,26 +276,25 @@ ul, ol { list-style: none; }
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 20px 40px;
+  /* script.js setzt --nav-progress 1:1 zur Scroll-Position (0 bis 1, siehe
+     NAV_FADE_DISTANCE) — Hintergrund, Blur, Padding und Rand blenden darueber
+     kontinuierlich mit dem Scrollen statt per fester CSS-Transition-Dauer.
+     Das haelt den Uebergang exakt gleichmaessig, egal wie schnell gescrollt wird. */
+  --nav-progress: 0;
+  padding: calc(20px - 6px * var(--nav-progress)) 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid transparent;
-  transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease, border-bottom-color 0.4s ease;
+  background: rgba(10, 10, 10, calc(var(--nav-progress) * 0.92));
+  backdrop-filter: blur(calc(var(--nav-progress) * 12px));
+  -webkit-backdrop-filter: blur(calc(var(--nav-progress) * 12px));
+  border-bottom: 1px solid rgba(245, 240, 235, calc(var(--nav-progress) * 0.10));
 }
 
-.nav.scrolled {
-  background: rgba(10, 10, 10, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 14px 40px;
-  border-bottom-color: rgba(245, 240, 235, 0.10);
-}
-
-/* Prevent white line from border rendering — nur im gescrollten Zustand noetig,
-   sonst zeichnet das auch ueber dem transparenten Hero-Nav eine dauerhaft
-   sichtbare dunkle Linie. */
-.nav.scrolled::after {
+/* Prevent white line from border rendering. Blendet ueber --nav-progress mit
+   ein statt an die .scrolled-Klasse gebunden zu sein, sonst poppt die Linie
+   bei Scroll-Beginn hart auf statt weich mitzublenden. */
+.nav::after {
   content: '';
   position: absolute;
   bottom: -1px;
@@ -303,6 +302,7 @@ ul, ol { list-style: none; }
   right: 0;
   height: 1px;
   background: var(--bg-dark);
+  opacity: var(--nav-progress);
 }
 
 .nav-logo img {
