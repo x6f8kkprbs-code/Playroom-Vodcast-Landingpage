@@ -616,7 +616,9 @@ document.addEventListener('DOMContentLoaded', () => {
   video.preload = 'metadata';
   video.setAttribute('playsinline', '');
   video.setAttribute('aria-hidden', 'true');
-  video.src = 'docs/optimized/hero-loop.mp4';
+  // Root-absoluter Pfad: das Script laeuft auch unter /en/, relativ wuerde
+  // dort /en/docs/... angefragt und das Video bliebe aus.
+  video.src = '/docs/optimized/hero-loop.mp4';
 
   function removeVideo() {
     hero.classList.remove('has-video');

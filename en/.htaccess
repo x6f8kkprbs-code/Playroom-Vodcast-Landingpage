@@ -1,0 +1,4 @@
+# Englische 404-Seite fuer den /en/-Pfad.
+# Gilt nur fuer Requests unterhalb von /en/ — die deutsche Seite behaelt
+# ihr bisheriges Verhalten (Server-Default-404, kein ErrorDocument im Root).
+ErrorDocument 404 /en/404.html
