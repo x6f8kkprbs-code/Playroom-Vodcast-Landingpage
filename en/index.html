@@ -816,9 +816,24 @@ window.scrollTo(0, 0);
         <label for="contact-message">Your message</label>
         <textarea id="contact-message" name="Message" rows="4" placeholder="Briefly describe your project – format, scope, timeline ..."></textarea>
       </div>
-      <!-- Attribution question (not yet part of the live form flow — EN strings prepared, per project brief):
-           Question: "How did you find us?"
-           Options: "Google search" / "ChatGPT or another AI assistant" / "Recommendation" / "Social media" / "Other" -->
+      <div class="form-group">
+        <label for="contact-discovery-source">How did you hear about us?</label>
+        <select id="contact-discovery-source" name="discoverySource">
+          <option value="" selected>Please select</option>
+          <option value="chatgpt" data-ai-source="true">ChatGPT</option>
+          <option value="other_ai" data-ai-source="true">Other AI</option>
+          <option value="google">Google</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="recommendation">Recommendation</option>
+          <option value="social_media">Instagram or other social media</option>
+          <option value="already_known">Already knew Playroom Studios</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group contact-discovery-detail" hidden>
+        <label for="contact-discovery-detail">Optional: What did you ask or search for?</label>
+        <input type="text" id="contact-discovery-detail" name="discoveryDetail" maxlength="500" disabled>
+      </div>
       <button type="submit" class="btn-primary form-submit">Send inquiry</button>
       <p class="form-privacy">By submitting, you agree to the processing of your data in accordance with our <a href="/Playroom_Studios_Privacy_Policy_DE_EN.pdf" target="_blank" rel="noopener">privacy policy</a>.</p>
     </form>
@@ -840,6 +855,6 @@ window.scrollTo(0, 0);
 <script src="https://bot.podcast-frankfurt.net/widget.js"></script>
 
 <!-- Script -->
-<script src="/script.js?v=21"></script>
+<script src="/script.js?v=22"></script>
 </body>
 </html>

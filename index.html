@@ -874,6 +874,24 @@ window.scrollTo(0, 0);
         <label for="contact-message">Nachricht</label>
         <textarea id="contact-message" name="Nachricht" rows="4" placeholder="Beschreib kurz dein Vorhaben – Format, Umfang, Zeitrahmen ..."></textarea>
       </div>
+      <div class="form-group">
+        <label for="contact-discovery-source">Wie bist du auf uns aufmerksam geworden?</label>
+        <select id="contact-discovery-source" name="discoverySource">
+          <option value="" selected>Bitte auswählen</option>
+          <option value="chatgpt" data-ai-source="true">ChatGPT</option>
+          <option value="other_ai" data-ai-source="true">Andere KI</option>
+          <option value="google">Google</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="recommendation">Empfehlung</option>
+          <option value="social_media">Instagram oder andere soziale Medien</option>
+          <option value="already_known">Playroom Studios bereits bekannt</option>
+          <option value="other">Sonstiges</option>
+        </select>
+      </div>
+      <div class="form-group contact-discovery-detail" hidden>
+        <label for="contact-discovery-detail">Optional: Was wurde bei der KI gefragt oder gesucht?</label>
+        <input type="text" id="contact-discovery-detail" name="discoveryDetail" maxlength="500" disabled>
+      </div>
       <button type="submit" class="btn-primary form-submit">Anfrage senden</button>
       <p class="form-privacy">Mit dem Absenden stimmst du der Verarbeitung deiner Daten gemäß unserer <a href="/Playroom_Studios_Privacy_Policy_DE_EN.pdf" target="_blank" rel="noopener">Datenschutzerklärung</a> zu.</p>
     </form>
@@ -895,6 +913,6 @@ window.scrollTo(0, 0);
 <script src="https://bot.podcast-frankfurt.net/widget.js"></script>
 
 <!-- Script -->
-<script src="script.js?v=21"></script>
+<script src="script.js?v=22"></script>
 </body>
 </html>

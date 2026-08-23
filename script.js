@@ -408,6 +408,69 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactModal = document.getElementById('contactModal');
   const contactForm = document.getElementById('contactForm');
   const contactSuccess = document.getElementById('contactSuccess');
+  const discoverySource = contactForm?.querySelector('#contact-discovery-source');
+  const discoveryDetailGroup = contactForm?.querySelector('.contact-discovery-detail');
+  const discoveryDetail = contactForm?.querySelector('#contact-discovery-detail');
+  const discoveryPayloadLabels = document.documentElement.lang === 'en'
+    ? {
+        sourceField: 'How they found us',
+        detailField: 'AI question or search',
+        notSpecified: 'Not specified',
+        values: {
+          chatgpt: 'ChatGPT',
+          other_ai: 'Other AI',
+          google: 'Google',
+          linkedin: 'LinkedIn',
+          recommendation: 'Recommendation',
+          social_media: 'Instagram or other social media',
+          already_known: 'Already knew Playroom Studios',
+          other: 'Other'
+        }
+      }
+    : {
+        sourceField: 'Gefunden über',
+        detailField: 'Frage oder Suche bei der KI',
+        notSpecified: 'Nicht angegeben',
+        values: {
+          chatgpt: 'ChatGPT',
+          other_ai: 'Andere KI',
+          google: 'Google',
+          linkedin: 'LinkedIn',
+          recommendation: 'Empfehlung',
+          social_media: 'Instagram oder andere soziale Medien',
+          already_known: 'Playroom Studios bereits bekannt',
+          other: 'Sonstiges'
+        }
+      };
+
+  function updateDiscoveryDetail() {
+    if (!discoverySource || !discoveryDetailGroup || !discoveryDetail) return;
+    const isAiSource = discoverySource.selectedOptions[0]?.dataset.aiSource === 'true';
+    discoveryDetailGroup.hidden = !isAiSource;
+    discoveryDetail.disabled = !isAiSource;
+    if (!isAiSource) discoveryDetail.value = '';
+  }
+
+  if (discoverySource) {
+    discoverySource.addEventListener('change', updateDiscoveryDetail);
+    updateDiscoveryDetail();
+  }
+
+  function addReadableDiscoveryFields(formData) {
+    formData.delete('discoverySource');
+    formData.delete('discoveryDetail');
+
+    const sourceValue = discoverySource?.value || '';
+    const readableSource = discoveryPayloadLabels.values[sourceValue]
+      || discoveryPayloadLabels.notSpecified;
+    formData.append(discoveryPayloadLabels.sourceField, readableSource);
+
+    const isAiSource = sourceValue === 'chatgpt' || sourceValue === 'other_ai';
+    const detailValue = discoveryDetail?.value.trim() || '';
+    if (isAiSource && detailValue) {
+      formData.append(discoveryPayloadLabels.detailField, detailValue);
+    }
+  }
 
   function openContactModal(e) {
     if (e) e.preventDefault();
@@ -468,6 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const formData = new FormData(contactForm);
+      addReadableDiscoveryFields(formData);
 
       fetch(contactForm.action, {
         method: 'POST',
@@ -486,6 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(closeContactModal, 3000);
         setTimeout(() => {
           contactForm.reset();
+          updateDiscoveryDetail();
           contactForm.style.display = '';
           contactModal.querySelector('.contact-modal-header').style.display = '';
           contactSuccess.style.display = 'none';
