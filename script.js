@@ -596,11 +596,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Cursor-Färbung positionsbasiert bestimmen — robust gegen Scrollen bei
-  // stehender Maus. Orange-Statement → weiß, Paper-Sektion → orange, Rest dunkel (weiß).
+  // stehender Maus. Orange-Flächen → weiß, Paper-Sektion → orange, Rest dunkel (weiß).
   function updateTone() {
     var el = document.elementFromPoint(tx, ty);
     var sec = el && el.closest ? el.closest('section') : null;
-    cursor.classList.toggle('cursor--on-orange', !!(sec && sec.classList.contains('statement-section')));
+    var onOrange = !!(el && el.closest && el.closest('.btn-primary')) ||
+      !!(sec && sec.classList.contains('statement-section'));
+    cursor.classList.toggle('cursor--on-orange', onOrange);
     cursor.classList.toggle('cursor--on-light', !!(sec && sec.classList.contains('section--paper')));
   }
 
